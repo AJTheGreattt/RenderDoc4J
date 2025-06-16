@@ -56,7 +56,7 @@ import java.util.function.Supplier;
  *          <li> This method will return a {@link Builder} instance which you can customize as you see fit. Consult the Javadocs for the {@link Builder} class for more information...
  *     </ul>
  *
- *     <li>{@link RenderDocAPI#builder(RenderDocAPIVersion)} & {@link RenderDocAPI#getOrBuildDefaultInstance(RenderDocAPIVersion)}
+ *     <li>{@link RenderDocAPI#builder(RenderDocAPIVersion)} and {@link RenderDocAPI#getOrBuildDefaultInstance(RenderDocAPIVersion)}
  *     <ul>
  *          <li> These two methods allow for you to request a specific {@link RenderDocAPIVersion}. Please see the <i>'API Versioning'</i> section below for more information...
  *     </ul>

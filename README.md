@@ -29,7 +29,7 @@ There are multiple ways to create and obtain the `Instance`\:
   * Calling this method will check if the `Instance` is null, and if it is, will create a new default-setting `Instance`.
 * `RenderDocAPI.builder()`
   * This method will return a `Builder` instance which you can customize as you see fit. Consult the Javadocs for the `Builder` class for more information...
-* `RenderDocAPI.builder(version)` & `RenderDocAPI.getOrBuildDefaultInstance(version)`
+* `RenderDocAPI.builder(version)` and `RenderDocAPI.getOrBuildDefaultInstance(version)`
   * These two methods allow for you to request a specific `RenderDocAPIVersion`. Please see the [API Versioning](#api-versioning) section below for more information...
 
 ## API Versioning
