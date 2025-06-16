@@ -205,8 +205,6 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method returns a new {@link Builder} that defaults to the latest {@link RenderDocAPIVersion}.
-     *
      * @return A new {@link Builder} that defaults to the latest {@link RenderDocAPIVersion}
      * @throws IllegalStateException If the {@link RenderDocAPI#INSTANCE Instance} has already been initialized
      * @see RenderDocAPI#builder(RenderDocAPIVersion)
@@ -267,7 +265,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method does one of the following:
+     * Does one of the following:
      * <ol>
      *     <li>If the {@link RenderDocAPI#INSTANCE Instance} has not been initialized, it builds a default instance based on the {@link RenderDocAPIVersion} you request, and sets the {@link RenderDocAPI#INSTANCE Instance} equal to the newly built instance.</li>
      *     <li>If the {@link RenderDocAPI#INSTANCE Instance} has been initialized, it returns this instance.</li>
@@ -444,11 +442,12 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method returns the {@link RenderDocAPIVersion} being used for the API currently.
+     * Returns the {@link RenderDocAPIVersion} being used for the API currently.
      *
      * <p>This value is determined during {@link RenderDocAPI#INSTANCE Instance} creation, and does not invoke the underlying {@code GetAPIVersion} function.</p>
      *
      * @return The {@link RenderDocAPIVersion} in use
+     * @see "The RenderDocAPI Javadoc section, <i>'API Versioning'</i> for more information..."
      */
     //TEST: PASSING
     public RenderDocAPIVersion getAPIVersion() {
@@ -456,7 +455,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method calls {@link RenderDocAPI#setFocusToggleKeys} with {@code null}.
+     * Calls {@link RenderDocAPI#setFocusToggleKeys} with {@code null}.
      *
      * @see RenderDocAPI#setFocusToggleKeys(RenderDocInputButton[] buttons)
      */
@@ -466,7 +465,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method sets the keys that will be used for focus-toggling. You may pass in {@code null} if you would like to disable focus-toggling keys.
+     * Sets the keys that will be used for focus-toggling. You may pass in {@code null} if you would like to disable focus-toggling keys.
      *
      * @param buttons An array of buttons you would like to use for focus-toggling, or {@code null} if you would not like to use any
      * @see RenderDocAPI#disableFocusToggleKeys()
@@ -477,7 +476,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method calls {@link RenderDocAPI#setCaptureKeys} with {@code null}.
+     * Calls {@link RenderDocAPI#setCaptureKeys} with {@code null}.
      *
      * @see RenderDocAPI#setCaptureKeys(RenderDocInputButton[] buttons)
      */
@@ -487,7 +486,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method sets the keys that will be used for capturing. You may pass in {@code null} if you would like to disable capturing keys.
+     * Sets the keys that will be used for capturing. You may pass in {@code null} if you would like to disable capturing keys.
      *
      * @param buttons An array of buttons you would like to use for capturing, or {@code null} if you would not like to use any
      * @see RenderDocAPI#disableCaptureKeys()
@@ -512,8 +511,6 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method returns the current path in which capture files are being saved.
-     *
      * @return The current path in which capture files are being saved
      */
     //TEST: PASSING
@@ -544,8 +541,6 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This method returns the current {@link OverlaySettingBits}.
-     *
      * @return The current {@link OverlaySettingBits}
      * @see OverlaySettingBits
      */

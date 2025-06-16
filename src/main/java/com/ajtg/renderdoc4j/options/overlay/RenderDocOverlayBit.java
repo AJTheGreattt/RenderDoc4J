@@ -80,6 +80,10 @@ public enum RenderDocOverlayBit implements EnumIntNativeMapped {
         return getBit();
     }
 
+    /**
+     * @return the bit that corresponds to this {@link RenderDocOverlayBit}
+     * @see OverlaySettingBits
+     */
     public int getBit() {
         return this.bit;
     }

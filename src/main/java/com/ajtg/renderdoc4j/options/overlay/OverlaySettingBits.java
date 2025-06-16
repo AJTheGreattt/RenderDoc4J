@@ -7,7 +7,7 @@ import org.jetbrains.annotations.ApiStatus;
 import java.util.EnumSet;
 
 /**
- * A QOL wrapper for managing Overlay Bits.
+ * A QoL wrapper for managing Overlay Bits.
  *
  * <p>Since RenderDoc does not allow setting bits directly, this class is meant to add some simplicity to the process.</p>
  *
@@ -30,7 +30,7 @@ public final class OverlaySettingBits {
     }
 
     /**
-     * This method obtains the currently active overlay bits using {@link OverlaySettingBits#getOverlayBits()}, and checks what bits are active using bitwise AND ({@code &}) operations.
+     * Obtains the currently active overlay bits using {@link OverlaySettingBits#getOverlayBits()}, and checks what bits are active using bitwise AND ({@code &}) operations.
      *
      * @return An {@link EnumSet} of the currently active {@link RenderDocOverlayBit}s
      * @see OverlaySettingBits#getOverlayBits()
@@ -51,8 +51,6 @@ public final class OverlaySettingBits {
     }
 
     /**
-     * This method retrieves the currently active bit mask that determines what overlay settings are active.
-     *
      * @return The bit mask that determines what overlay settings are active
      * @see OverlaySettingBits#getActiveBits()
      */
@@ -62,7 +60,7 @@ public final class OverlaySettingBits {
     }
 
     /**
-     * This method performs an XOR ({@code ^}) bitwise operation on the given {@link RenderDocOverlayBit}, effectively swapping the option between OFF ({@code 0}) and ON ({@code 1}) status.
+     * Performs an XOR ({@code ^}) bitwise operation on the given {@link RenderDocOverlayBit}, effectively swapping the option between OFF ({@code 0}) and ON ({@code 1}) status.
      *
      * @param option The {@link RenderDocOverlayBit} that you would like to toggle
      * @see OverlaySettingBits#turnOff(RenderDocOverlayBit option)
@@ -77,7 +75,7 @@ public final class OverlaySettingBits {
     }
 
     /**
-     * This method enables the given {@link RenderDocOverlayBit}.
+     * Enables the given {@link RenderDocOverlayBit}.
      *
      * @param option The {@link RenderDocOverlayBit} that you would like to turn on
      * @see OverlaySettingBits#toggle(RenderDocOverlayBit option)
@@ -89,7 +87,7 @@ public final class OverlaySettingBits {
     }
 
     /**
-     * This method disables the given {@link RenderDocOverlayBit}.
+     * Disables the given {@link RenderDocOverlayBit}.
      *
      * @param option The {@link RenderDocOverlayBit} that you would like to turn on
      * @see OverlaySettingBits#toggle(RenderDocOverlayBit option)
@@ -101,7 +99,7 @@ public final class OverlaySettingBits {
     }
 
     /**
-     * This method uses an AND ({@code &}) bitwise operation to determine if the given {@link RenderDocOverlayBit} is active.
+     * Uses an AND ({@code &}) bitwise operation to determine if the given {@link RenderDocOverlayBit} is active.
      * @param option The option you would like to query the status of
      * @return True if the option is enabled
      **/
