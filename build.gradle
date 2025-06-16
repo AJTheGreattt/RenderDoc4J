@@ -1,0 +1,71 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'checkstyle'
+}
+
+group = 'com.ajtg'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+checkstyle {
+    toolVersion = '10.25.0'
+    config = resources.text.fromFile("src/main/resources/checkstyle.xml")
+    reportsDir = file("${project.projectDir}/src/main/resources")
+    showViolations = true
+}
+
+tasks.withType(Checkstyle).configureEach {
+    check.dependsOn it
+
+    sourceSets.main.java.srcDirs.each {
+        sourceDir -> source(sourceDir)
+    }
+
+    ignoreFailures = false;
+    exclude '**/exclude/**/*.java'
+}
+
+javadoc {
+    setFailOnError(false)
+    exclude '**/exclude/'
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}
+
+dependencies {
+    implementation("net.java.dev.jna:jna:5.17.0")
+
+    implementation("org.jetbrains:annotations:24.0.0")
+}
+
+jar {
+    archiveFileName = 'RDOC4J-' + project.version + '.jar'
+
+    exclude '**/exclude/'
+
+    manifest {
+        attributes 'Build-Timestamp':
+                new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                'Implementation-Version':
+                        project.version
+    }
+}
