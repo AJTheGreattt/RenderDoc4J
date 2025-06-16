@@ -28,7 +28,9 @@ import java.util.function.Supplier;
  *
  * <h2>Getting Started</h2>
  *
- * <h3>Lazy Initialization</h3>
+ * <p>If you wanna' just get right to it, call {@link RenderDocAPI#getInstance()} before any Graphics API calls, and (as long as your program's window is up...) you will see that RenderDoc is injected into your program.
+ *
+ * <h3>Lazy Initialization (for those who need all the details...)</h3>
  *
  * <p>This library uses a lazy initialization approach
  * to allow for direct control of when the RenderDocAPI will be injected into the application.</p>
@@ -38,6 +40,27 @@ import java.util.function.Supplier;
  * <p>It is important that you initialize the {@link RenderDocAPI#INSTANCE Instance} <b>before</b> any Graphics API calls, just as it is somewhat required for RenderDoc.</p>
  *
  * <p>Initializing the {@link RenderDocAPI#INSTANCE Instance} after Graphics API calls have already been made has undefined results.</p>
+ *
+ * <h3>Obtaining an Instance</h3>
+ *
+ * <p>There are multiple ways to create and obtain the {@link RenderDocAPI#INSTANCE Instance}:</p>
+ *
+ * <ul>
+ *     <li>{@link RenderDocAPI#getInstance()}
+ *     <ul>
+ *          <li> Calling this method will check if the {@link RenderDocAPI#INSTANCE Instance} is null, and if it is, will create a new default-setting {@link RenderDocAPI#INSTANCE Instance}.
+ *     </ul>
+ *
+ *     <li>{@link RenderDocAPI#builder()}
+ *     <ul>
+ *          <li> This method will return a {@link Builder} instance which you can customize as you see fit. Consult the Javadocs for the {@link Builder} class for more information...
+ *     </ul>
+ *
+ *     <li>{@link RenderDocAPI#builder(RenderDocAPIVersion)} & {@link RenderDocAPI#getOrBuildDefaultInstance(RenderDocAPIVersion)}
+ *     <ul>
+ *          <li> These two methods allow for you to request a specific {@link RenderDocAPIVersion}. Please see the <i>'API Versioning'</i> section below for more information...
+ *     </ul>
+ * </ul>
  *
  * <h2>API Versioning</h2>
  *
