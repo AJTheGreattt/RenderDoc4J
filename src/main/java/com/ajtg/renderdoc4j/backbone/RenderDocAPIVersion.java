@@ -9,52 +9,66 @@ public enum RenderDocAPIVersion implements NativeMapped {
      * RenderDocAPI V1.0.0.
      */
     Version_1_0_0(1, 0, 0),
+
     /**
      * RenderDocAPI V1.0.1.
      */
     Version_1_0_1(1, 0, 1),
+
     /**
      * RenderDocAPI V1.0.2.
      */
     Version_1_0_2(1, 0, 2),
+
     /**
      * RenderDocAPI V1.1.0.
      */
     Version_1_1_0(1, 1, 0),
+
     /**
      * RenderDocAPI V1.1.1.
      */
     Version_1_1_1(1, 1, 1),
+
     /**
      * RenderDocAPI V1.1.2.
      */
     Version_1_1_2(1, 1, 2),
+
     /**
      * RenderDocAPI V1.2.0.
      */
     Version_1_2_0(1, 2, 0),
+
     /**
      * RenderDocAPI V1.3.0.
      */
     Version_1_3_0(1, 3, 0),
+
     /**
      * RenderDocAPI V1.4.0.
      */
     Version_1_4_0(1, 4, 0),
+
     /**
      * RenderDocAPI V1.4.1.
      */
     Version_1_4_1(1, 4, 1),
+
     /**
      * RenderDocAPI V1.4.2.
      */
     Version_1_4_2(1, 4, 2),
+
     /**
      * RenderDocAPI V1.5.0.
      */
     Version_1_5_0(1, 5, 0),
+
     /**
-     * The Default Version of RenderDocAPI that will be used if no Version is specified.
+     * The default version of the {@link RenderDocAPI} that will be used if no {@link RenderDocAPIVersion Version} is specified.
+     *
+     * <p>This is the latest version of the API.</p>
      *
      * <p>RenderDocAPI V1.6.0.</p>
      */
@@ -75,7 +89,7 @@ public enum RenderDocAPIVersion implements NativeMapped {
         this.patch = patch;
         this.strippedVersion = Integer.parseInt("" + major + minor + patch);
 
-        this.fullVersion = Integer.parseInt("" + (major < 10 ? major + "0" : major) + (minor < 10 ? minor + "0" : minor) + patch);
+        this.fullVersion = Integer.parseInt("" + major + (minor < 10 ? "0" + minor : minor) + (patch < 10 ? "0" + patch : patch));
     }
 
     /**
@@ -149,6 +163,9 @@ public enum RenderDocAPIVersion implements NativeMapped {
         return this.patch;
     }
 
+    /**
+     * @return the version formatted as described by {@link RenderDocAPIVersion#fromInt(int)}
+     */
     public int getStrippedVersion() {
         return this.strippedVersion;
     }
