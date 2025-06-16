@@ -4,7 +4,7 @@ import com.ajtg.renderdoc4j.backbone.FrameCapture;
 import com.ajtg.renderdoc4j.backbone.RenderDocAPI;
 
 /**
- * A functional interface for listening to when events are captured.
+ * A functional interface for listening to when frames are captured.
  * @see RenderDocAPI#triggerCapture()
  * @see FrameCapture
  */
