@@ -6,4 +6,4 @@ for users to utilize it in Java.
 ## Dependencies and Licensing
 <b>Warning</b>: This library bundles the RenderDoc .DLL (for Windows), which is also licensed under the MIT License.
 
-A copy of RenderDoc's License and Copyright Notices can be found in [`licenses/RenderDoc License.md`](licenses/RenderDoc%20License.md) markdown file within this distribution.
+A copy of RenderDoc's License and Copyright Notices can be found in the [`licenses/RenderDoc License.md`](licenses/RenderDoc%20License.md) markdown file within this distribution.
