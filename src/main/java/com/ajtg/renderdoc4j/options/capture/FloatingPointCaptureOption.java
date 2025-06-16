@@ -3,10 +3,10 @@ package com.ajtg.renderdoc4j.options.capture;
 import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
 
 /**
-* The different "floating-point" options that RenderDoc supports.
+ * The different "floating-point" options that RenderDoc supports.
  *
  * <p>This excludes the AllowUnsupportedVendorExtensions option, as it is undocumented <i>for a reason</i> via the official RenderDocAPI Header documentation.</p>
-* */
+ **/
 //TEST: PASSING
 public enum FloatingPointCaptureOption implements EnumIntNativeMapped {
 

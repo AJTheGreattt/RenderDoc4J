@@ -103,8 +103,8 @@ public final class OverlaySettingBits {
     /**
      * This method uses an AND ({@code &}) bitwise operation to determine if the given {@link RenderDocOverlayBit} is active.
      * @param option The option you would like to query the status of
-    * @return True if the option is enabled
-    * */
+     * @return True if the option is enabled
+     **/
     //TEST: PASSING
     public boolean isEnabled(RenderDocOverlayBit option) {
         return (getOverlayBits() & option.getBit()) != 0;

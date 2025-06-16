@@ -4,12 +4,12 @@ import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
 import com.ajtg.renderdoc4j.backbone.RenderDocAPI;
 
 /**
-* An enum for all allocated and accepted InputButtons for RenderDoc.
+ * An enum for all allocated and accepted InputButtons for RenderDoc.
  *
  * @see RenderDocAPI#setCaptureKeys(RenderDocInputButton[])
  * @see RenderDocAPI#setFocusToggleKeys(RenderDocInputButton[])
  * @see <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv421RENDERDOC_InputButton">Official RenderDoc Documentation</a> for descriptions of the keys...
-* */
+ **/
 public enum RenderDocInputButton implements EnumIntNativeMapped {
     // 0 - 9
     Key_0(0x30),
