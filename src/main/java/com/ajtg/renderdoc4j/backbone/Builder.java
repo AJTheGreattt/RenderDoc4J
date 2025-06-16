@@ -42,8 +42,6 @@ public class Builder {
 
     private String sharedLibraryName = "renderdoc";
 
-    @NotNull Supplier<RenderDocLibrary> libSupplier = () -> Native.load(this.sharedLibraryName, RenderDocLibrary.class);
-
     Builder(RenderDocAPIVersion version) {
         this.version = version;
     }
