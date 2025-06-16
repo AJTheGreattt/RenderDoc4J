@@ -1,6 +1,6 @@
 # RenderDoc4J
 
-This library wraps the API of the renown [RenderDoc]([RenderDoc](https://renderdoc.org))
+This library wraps the API of the renown [RenderDoc](https://renderdoc.org)
 software and creates high-level abstracted bindings that allow
 for users to utilize it in Java.
 
