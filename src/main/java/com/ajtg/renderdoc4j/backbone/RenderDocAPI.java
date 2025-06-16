@@ -48,7 +48,7 @@ import java.util.function.Supplier;
  * <ul>
  *     <li>{@link RenderDocAPI#getInstance()}
  *     <ul>
- *          <li> Calling this method will check if the {@link RenderDocAPI#INSTANCE Instance} is null, and if it is, will create a new default-setting {@link RenderDocAPI#INSTANCE Instance}.
+ *          <li> Calling this method will check if the {@link RenderDocAPI#INSTANCE Instance} is {@code null}, and if it is, will create a new default-setting {@link RenderDocAPI#INSTANCE Instance}.
  *     </ul>
  *
  *     <li>{@link RenderDocAPI#builder()}
@@ -408,7 +408,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv414GetNumCapturesv">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * This function returns the number of frame captures that have been made.
@@ -489,7 +489,7 @@ public final class RenderDocAPI {
     /**
      * This method sets the keys that will be used for capturing. You may pass in {@code null} if you would like to disable capturing keys.
      *
-     * @param buttons An array of buttons you would like to use for capturing, or null if you would not like to use any
+     * @param buttons An array of buttons you would like to use for capturing, or {@code null} if you would not like to use any
      * @see RenderDocAPI#disableCaptureKeys()
      */
     //TEST: PASSING
@@ -597,9 +597,13 @@ public final class RenderDocAPI {
     }
 
     /**
-     * This function returns a value to indicate whether the RenderDoc UI is currently connected to the current process.
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv424IsTargetControlConnectedv">Official RenderDoc Documentation</a>:
      *
-     * @return 1 if the RenderDoc UI is currently connected, or 0 otherwise.
+     * <blockquote>
+     * This function returns a value to indicate whether the RenderDoc UI is currently connected to the current process.
+     * </blockquote>
+     *
+     * @return {@code true} if the RenderDoc UI is currently connected, or {@code false} otherwise.
      */
     //TEST: PASSING
     public boolean isTargetControlConnected() {
@@ -612,8 +616,8 @@ public final class RenderDocAPI {
      * <blockquote>
      * <p>This function will determine the closest matching replay UI executable for the current RenderDoc module and launch it.</p>
      * </blockquote>
-     * @param connectTargetControl should be set to 1 if the UI should immediately connect to the application.
-     * @param cmdline              is an optional UTF-8 null-terminated string to be appended to the command line, e.g. a capture filename. If this parameter is {@code NULL}, the command line will be unmodified.
+     * @param connectTargetControl should be set to {@code true} if the UI should immediately connect to the application.
+     * @param cmdline              is an optional UTF-8 null-terminated string to be appended to the command line, e.g. a capture filename. If this parameter is {@code null}, the command line will be unmodified.
      * @return If the UI was successfully launched, this function will return the PID of the new process. Otherwise it will return 0.
      */
     //TEST: PASSING
@@ -654,14 +658,14 @@ public final class RenderDocAPI {
     /**
      * <b><i>Warning: This is an optional operation. If you do not know what you are doing, you most likely do not need to use it.</i></b>
      *
-     * <p>From the <a href="">Official RenderDoc Documentation</a>:
+     * <p>From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv417StartFrameCapture23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">Official RenderDoc Documentation</a>:
      * <blockquote>
      *     This function will immediately begin a capture for the specified device/window combination.
      * </blockquote>
      *
-     * @param devicePointer is a handle to the API ‘device’ object that will be set active. May be {@code NULL} to wildcard match.
+     * @param devicePointer is a handle to the API ‘device’ object that will be set active. May be {@code null} to wildcard match.
      *
-     * @param windowHandle is a handle to the platform window handle that will be set active. May be {@code NULL} to wildcard match.
+     * @param windowHandle is a handle to the platform window handle that will be set active. May be {@code null} to wildcard match.
      *
      * @see RenderDocAPI#startFrameCapture()
      */
@@ -722,7 +726,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv416IsFrameCapturingv">Official RenderDoc Documentation</a>:
      * <blockquote>
      *     This function returns a value to indicate whether the current frame is capturing.
      * </blockquote>
@@ -737,15 +741,15 @@ public final class RenderDocAPI {
     /**
      * <b><i>Warning: This is an optional operation. If you do not know what you are doing, you most likely do not need to use it.</i></b>
      *
-     * <p>From the <a href="">Official RenderDoc Documentation</a>:
+     * <p>From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv415EndFrameCapture23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      *     This function will immediately end an active capture for the specified device/window combination.
      * </blockquote>
      *
-     * @param devicePointer is a handle to the API ‘device’ object that will be set active. May be NULL to wildcard match.
+     * @param devicePointer is a handle to the API ‘device’ object that will be set active. May be {@code null} to wildcard match.
      *
-     * @param windowHandle is a handle to the platform window handle that will be set active. May be NULL to wildcard match.
+     * @param windowHandle is a handle to the platform window handle that will be set active. May be {@code null} to wildcard match.
      *
      * @return {@code true} if the capture succeeded, and {@code false} if there was an error capturing.
      *
@@ -762,7 +766,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv424TriggerMultiFrameCapture8uint32_t">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * <p>This function will trigger multiple sequential frame captures as if the user had pressed one of the capture hotkeys before each frame. The captures will be taken from the next frames presented to whichever window is considered current.

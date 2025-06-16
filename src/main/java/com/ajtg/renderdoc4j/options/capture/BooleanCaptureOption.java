@@ -5,74 +5,76 @@ import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
 /**
  * The different "boolean" options that RenderDoc supports.
  *
- * <p>As of right now, this excludes the {@code AllowUnsupportedVendorExtensions} option, as it is undocumented <i>for a reason</i> via the official RenderDocAPI Header documentation.</p>
+ * <p>As of right now, this excludes the {@code AllowUnsupportedVendorExtensions} option, as it is undocumented <i>for a reason</i> via the official RenderDoc API Header documentation.</p>
+ *
  */
 //TEST: PASSING
 public enum BooleanCaptureOption implements EnumIntNativeMapped {
+
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * Allow the application to enable vsync
      *
      * <p>Default - enabled
      *
-     * <p>1 - The application can enable or disable vsync at will
+     * <p>{@code true} The application can enable or disable vsync at will
      *
-     * <p>0 - vsync is force disabled
+     * <p>{@code false} vsync is force disabled
      * </blockquote>
      */
     AllowVSync(0),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * Allow the application to enable fullscreen
      *
      * <p>Default - enabled
      *
-     * <p>1 - The application can enable or disable fullscreen at will
+     * <p>{@code true} The application can enable or disable fullscreen at will
      *
-     * <p>0 - fullscreen is force disabled
+     * <p>{@code false} fullscreen is force disabled
      * </blockquote>
      */
     AllowFullscreen(1),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * Record API debugging events and messages
      *
      * <p>Default - disabled
      *
-     * <p>1 - Enable built-in API debugging features and records the results into
+     * <p>{@code true} Enable built-in API debugging features and records the results into
      * the capture, which is matched up with events on replay
      *
-     * <p>0 - no API debugging is forcibly enabled
+     * <p>{@code false} no API debugging is forcibly enabled
      * </blockquote>
      */
     APIValidation(2),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * Capture CPU callstacks for API events
      *
      * <p>Default - disabled
      *
-     * <p>1 - Enables capturing of callstacks
+     * <p>{@code true} Enables capturing of callstacks
      *
-     * <p>0 - no callstacks are captured
+     * <p>{@code false} no callstacks are captured
      * </blockquote>
      *
      */
     CaptureCallstacks(3),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * When capturing CPU callstacks, only capture them from actions.
@@ -80,17 +82,17 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
      *
      * <p>Default - disabled
      *
-     * <p>1 - Only captures callstacks for actions.
+     * <p>{@code true} Only captures callstacks for actions.
      * Ignored if CaptureCallstacks is disabled
      *
-     * <p>0 - Callstacks, if enabled, are captured for every event.
+     * <p>{@code false} Callstacks, if enabled, are captured for every event.
      * </blockquote>
      *
      */
     CaptureCallstacksOnlyActions(4),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * This option now controls the filling of uninitialised buffers with 0xdddddddd which was
@@ -105,16 +107,16 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
      *
      * <p>Default - disabled
      *
-     * <p>1 - Verify buffer access
+     * <p>{@code true} Verify buffer access
      *
-     * <p>0 - No verification is performed, and overwriting bounds may cause crashes or corruption in
+     * <p>{@code false} No verification is performed, and overwriting bounds may cause crashes or corruption in
      * RenderDoc.
      * </blockquote>
      */
     VerifyBufferAccess(6),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * Hooks any system API calls that create child processes, and injects
@@ -122,15 +124,15 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
      *
      * <p>Default - disabled
      *
-     * <p>1 - Hooks into spawned child processes
+     * <p>{@code true} Hooks into spawned child processes
      *
-     * <p>0 - Child processes are not hooked by RenderDoc
+     * <p>{@code false} Child processes are not hooked by RenderDoc
      * </blockquote>
      */
     HookIntoChildren(7),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * By default RenderDoc only includes resources in the final capture necessary
@@ -138,16 +140,16 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
      *
      * <p>Default - disabled
      *
-     * <p>1 - all live resources at the time of capture are included in the capture
+     * <p>{@code true} all live resources at the time of capture are included in the capture
      * and available for inspection
      *
-     * <p>0 - only the resources referenced by the captured frame are included
+     * <p>{@code false} only the resources referenced by the captured frame are included
      * </blockquote>
      */
     RefAllResources(8),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * <b>NOTE</b>: As of RenderDoc v1.1 this option has been deprecated. Setting or
@@ -159,18 +161,19 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
      *
      * <p>Default - disabled
      *
-     * <p>1 - initial contents at the start of each captured frame are saved, even if
+     * <p>{@code true} initial contents at the start of each captured frame are saved, even if
      * they are later overwritten or cleared before being used.
      *
-     * <p>0 - unless a read is detected, initial contents will not be saved and will
+     * <p>{@code false} unless a read is detected, initial contents will not be saved and will
      * appear as black or empty data.
      * </blockquote>
      *
      */
+    @Deprecated(forRemoval = true)
     SaveAllInitials(9),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * In APIs that allow for the recording of command lists to be replayed later,
@@ -184,9 +187,9 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
      * and always capture all command lists since the API is heavily oriented
      * around it and the overheads have been reduced by API design.
      *
-     * <p>1 - All command lists are captured from the start of the application
+     * <p>{@code true} All command lists are captured from the start of the application
      *
-     * <p>0 - Command lists are only captured if their recording begins during
+     * <p>{@code false} Command lists are only captured if their recording begins during
      * the period when a frame capture is in progress.
      * </blockquote>
      *
@@ -195,13 +198,13 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     CaptureAllCmdLists(10),
 
     /**
-     * From the <a href="">Official RenderDoc Documentation</a>:
+     * From the <a href="https://github.com/baldurk/renderdoc/blob/v1.x/renderdoc/api/app/renderdoc_app.h">Official RenderDoc Header File</a>:
      *
      * <blockquote>
      * Mute API debugging output when the API validation mode option is enabled
      * <p>Default - enabled
-     * <p>1 - Mute any API debug messages from being displayed or passed through
-     * <p>0 - API debugging is displayed as normal
+     * <p>{@code true} Mute any API debug messages from being displayed or passed through
+     * <p>{@code false} API debugging is displayed as normal
      * </blockquote>
      */
     DebugOutputMute(11);
