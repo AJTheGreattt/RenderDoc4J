@@ -205,7 +205,7 @@ public final class RenderDocAPI {
      *
      * @return A lazily-initialized {@link RenderDocAPI} with the default settings.
      */
-    public static synchronized RenderDocAPI getInstance() {
+    public static RenderDocAPI getInstance() {
 
         if (INSTANCE == null) {
             return builder(RenderDocAPIVersion.latest()).build();
@@ -234,7 +234,7 @@ public final class RenderDocAPI {
      * @see Builder#withSharedLibraryResource(String)
      */
     //TEST: PASSING
-    public static synchronized Builder builder(RenderDocAPIVersion version) {
+    public static Builder builder(RenderDocAPIVersion version) {
 
         if (INSTANCE != null) {
             throw INSTANCE_BUILT_ALREADY.get();
@@ -254,7 +254,7 @@ public final class RenderDocAPI {
      * @return The {@link RenderDocAPI#INSTANCE Instance}
      */
     //TEST: PASSING
-    public static synchronized RenderDocAPI getOrBuildDefaultInstance(RenderDocAPIVersion version) {
+    public static RenderDocAPI getOrBuildDefaultInstance(RenderDocAPIVersion version) {
 
         if (INSTANCE == null) {
             builder(version).build();
