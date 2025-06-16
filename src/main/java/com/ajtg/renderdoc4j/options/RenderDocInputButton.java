@@ -8,9 +8,10 @@ import com.ajtg.renderdoc4j.backbone.RenderDocAPI;
  *
  * @see RenderDocAPI#setCaptureKeys(RenderDocInputButton[])
  * @see RenderDocAPI#setFocusToggleKeys(RenderDocInputButton[])
+ * @see <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv421RENDERDOC_InputButton">Official RenderDoc Documentation</a> for descriptions of the keys...
 * */
 public enum RenderDocInputButton implements EnumIntNativeMapped {
-    // '0' - '9' matches ASCII values
+    // 0 - 9
     Key_0(0x30),
     Key_1(0x31),
     Key_2(0x32),
@@ -22,7 +23,7 @@ public enum RenderDocInputButton implements EnumIntNativeMapped {
     Key_8(0x38),
     Key_9(0x39),
 
-    // 'A' - 'Z' matches ASCII values
+    // A - Z
     Key_A(0x41),
     Key_B(0x42),
     Key_C(0x43),
@@ -50,8 +51,7 @@ public enum RenderDocInputButton implements EnumIntNativeMapped {
     Key_Y(0x59),
     Key_Z(0x5A),
 
-    // leave the rest of the ASCII range free
-    // in case we want to use it later
+    // 0x100 and up...
     Key_NonPrintable(0x100),
 
     Key_Divide(Key_NonPrintable.value + 1),
