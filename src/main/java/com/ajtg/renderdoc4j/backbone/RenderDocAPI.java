@@ -31,13 +31,23 @@ import java.util.function.Supplier;
  *
  * <p>As soon as the {@link RenderDocAPI#INSTANCE Instance} of the library is built—whether it indirectly from {@link RenderDocAPI#getInstance()}, or from a {@link Builder} instances {@link Builder#build() build()} call—it will be injected into your program.</p>
  *
- * <p>It is of utmost importance that you initialize the instance BEFORE any Graphics API calls, just as it is specified in RenderDoc documentation.</p>
+ * <p>It is important that you initialize the {@link RenderDocAPI#INSTANCE Instance} <b>before</b> any Graphics API calls, just as it is somewhat required for RenderDoc.</p>
+ *
+ * <p>Initializing the {@link RenderDocAPI#INSTANCE Instance} after Graphics API calls have already been made has results that are undefined.</p>
  *
  * <h2>API Versioning</h2>
  *
- * <p><b>Warning: </b>The {@link RenderDocAPIVersion API Version} you request may NOT be available dependent upon the version of the RenderDoc shared-library file you specify.</p>
+ * <p><b>Warning: </b>The {@link RenderDocAPIVersion} you request may not be available dependent upon the version of the RenderDoc shared-library file you may specify.</p>
  *
- * <p>As long as RenderDoc licensing allows, this library will come packaged with the latest RenderDoc .DLL (for Windows) file by default. If you are on another platform, you can still use this API as long as the following is true:
+ * <p>Specifying a {@link RenderDocAPIVersion} is not a requirement to use this library.</p>
+ *
+ * <p>Directly from the <a href="https://renderdoc.org/docs/in_application_api.html">Official RenderDoc Documentation</a>:</p>
+ *
+ * <blockquote>
+ *     Make sure to use a matching API header for your build - if you use a newer header, the API version may not be available. All RenderDoc builds supporting this API ship the header in their root directory.
+ * </blockquote>
+ *
+ * <p>As long as RenderDoc licensing allows, this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true:
  *  <ul>
  *      <li>RenderDoc can run on your platform</li>
  *      <li>You can provide the absolute path of the RenderDoc shared-library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>
