@@ -2,6 +2,7 @@ package com.ajtg.renderdoc4j.options.overlay;
 
 import com.ajtg.renderdoc4j.backbone.RenderDocAPI;
 import com.ajtg.renderdoc4j.backbone.RenderDocAPIInternal;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.EnumSet;
 
@@ -17,6 +18,7 @@ public final class OverlaySettingBits {
 
     private final RenderDocAPIInternal internal;
 
+    @ApiStatus.Internal
     public OverlaySettingBits(RenderDocAPIInternal internal, EnumSet<RenderDocOverlayBit> defaultSettings) {
         this.internal = internal;
 
@@ -60,7 +62,7 @@ public final class OverlaySettingBits {
     }
 
     /**
-     * This method performs a XOR ({@code ^}) bitwise operation on the given {@link RenderDocOverlayBit}, effectively swapping the option between OFF (0) and ON (1) status.
+     * This method performs an XOR ({@code ^}) bitwise operation on the given {@link RenderDocOverlayBit}, effectively swapping the option between OFF ({@code 0}) and ON ({@code 1}) status.
      *
      * @param option The {@link RenderDocOverlayBit} that you would like to toggle
      * @see OverlaySettingBits#turnOff(RenderDocOverlayBit option)
