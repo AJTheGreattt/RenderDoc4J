@@ -10,7 +10,7 @@ import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
 //TEST: PASSING
 public enum BooleanCaptureOption implements EnumIntNativeMapped {
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * Allow the application to enable vsync
@@ -25,7 +25,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     AllowVSync(0),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * Allow the application to enable fullscreen
@@ -40,7 +40,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     AllowFullscreen(1),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * Record API debugging events and messages
@@ -56,7 +56,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     APIValidation(2),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * Capture CPU callstacks for API events
@@ -72,7 +72,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     CaptureCallstacks(3),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * When capturing CPU callstacks, only capture them from actions.
@@ -90,7 +90,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     CaptureCallstacksOnlyActions(4),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * This option now controls the filling of uninitialised buffers with 0xdddddddd which was
@@ -114,7 +114,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     VerifyBufferAccess(6),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * Hooks any system API calls that create child processes, and injects
@@ -130,7 +130,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     HookIntoChildren(7),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * By default RenderDoc only includes resources in the final capture necessary
@@ -147,7 +147,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     RefAllResources(8),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * <b>NOTE</b>: As of RenderDoc v1.1 this option has been deprecated. Setting or
@@ -170,7 +170,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     SaveAllInitials(9),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * In APIs that allow for the recording of command lists to be replayed later,
@@ -195,7 +195,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
     CaptureAllCmdLists(10),
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * Mute API debugging output when the API validation mode option is enabled

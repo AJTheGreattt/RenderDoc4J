@@ -26,22 +26,26 @@ import java.util.function.Supplier;
 /**
  * <h1>RenderDoc API Wrapper for Java (RDOC4J)</h1>
  *
- * <p>This library uses a lazy-initialization approach,
+ * <h2>Getting Started</h2>
+ *
+ * <h3>Lazy Initialization</h3>
+ *
+ * <p>This library uses a lazy initialization approach
  * to allow for direct control of when the RenderDocAPI will be injected into the application.</p>
  *
- * <p>As soon as the {@link RenderDocAPI#INSTANCE Instance} of the library is built—whether it indirectly from {@link RenderDocAPI#getInstance()}, or from a {@link Builder} instances {@link Builder#build() build()} call—it will be injected into your program.</p>
+ * <p>As soon as the {@link RenderDocAPI#INSTANCE Instance} of the library is built—whether it indirectly from {@link RenderDocAPI#getInstance()}, or from a {@link Builder} instance's {@link Builder#build() build()} call—it will be injected into your program.</p>
  *
  * <p>It is important that you initialize the {@link RenderDocAPI#INSTANCE Instance} <b>before</b> any Graphics API calls, just as it is somewhat required for RenderDoc.</p>
  *
- * <p>Initializing the {@link RenderDocAPI#INSTANCE Instance} after Graphics API calls have already been made has results that are undefined.</p>
+ * <p>Initializing the {@link RenderDocAPI#INSTANCE Instance} after Graphics API calls have already been made has undefined results.</p>
  *
  * <h2>API Versioning</h2>
  *
- * <p><b>Warning: </b>The {@link RenderDocAPIVersion} you request may not be available dependent upon the version of the RenderDoc shared-library file you may specify.</p>
+ * <p><b>Warning:</b> The {@link RenderDocAPIVersion} you request may not be available depending on the version of the RenderDoc shared-library file (you may specify).</p>
  *
- * <p>Specifying a {@link RenderDocAPIVersion} is not a requirement to use this library.</p>
+ * <p>Specifying a {@link RenderDocAPIVersion} and/or shared-library file for RenderDoc is not a requirement to use this library.</p>
  *
- * <p>Directly from the <a href="https://renderdoc.org/docs/in_application_api.html">Official RenderDoc Documentation</a>:</p>
+ * <p>From the <a href="https://renderdoc.org/docs/in_application_api.html">Official RenderDoc Documentation</a>:</p>
  *
  * <blockquote>
  *     Make sure to use a matching API header for your build - if you use a newer header, the API version may not be available. All RenderDoc builds supporting this API ship the header in their root directory.
@@ -60,7 +64,7 @@ import java.util.function.Supplier;
  *
  * <p>You have the option to supply a platform-specific Window Handle and/or Graphics API-specific Device Pointer.</p>
  *
- * <p>Directly from the <a href="https://renderdoc.org/docs/in_application_api.html#:~:text=RENDERDOC_DevicePointer%20is%20a,Android%20ANativeWindow*.">Official RenderDoc Documentation</a>:</p>
+ * <p>From the <a href="https://renderdoc.org/docs/in_application_api.html#:~:text=RENDERDOC_DevicePointer%20is%20a,Android%20ANativeWindow*.">Official RenderDoc Documentation</a>:</p>
  *
  * <blockquote>
  *  {@code RENDERDOC_DevicePointer} is a typedef to {@code void*}. The contents of it are API specific:
@@ -79,7 +83,7 @@ import java.util.function.Supplier;
  * <p>My original use case for RenderDoc was capturing frames in a game I was building through LWJGL and thus OpenGL and GLFW.
  * I have listed some ways below that could be useful to you for providing these {@code long} values to this API.</p>
  *
- * <p><i>Where {@code glfwWindow} is the {@code long} you get from calling {@code glfwCreateWindow(...)}</i></p>
+ * <p><i>Where {@code glfwWindow} is defined as {@code long glfwWindow = glfwCreateWindow(...)}</i></p>
  * <blockquote>
  *     <p>Windows</p>
  *     <ul>
@@ -187,7 +191,7 @@ public final class RenderDocAPI {
      * @see RenderDocAPI#getInstance()
      */
     //TEST: PASSING
-    public static synchronized Builder builder() {
+    public static Builder builder() {
 
         if (INSTANCE != null) {
             throw INSTANCE_BUILT_ALREADY.get();
@@ -381,7 +385,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * This function returns the number of frame captures that have been made.
@@ -471,7 +475,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv418UnloadCrashHandlerv">RenderDoc</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv418UnloadCrashHandlerv">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * This function will remove RenderDoc’s crash handler from the target process.
@@ -495,7 +499,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv426SetCaptureFilePathTemplatePKc">RenderDoc</a>
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv426SetCaptureFilePathTemplatePKc">Official RenderDoc Documentation</a>
      *
      * <blockquote>
      * Set the template for new captures. The template can either be a relative or absolute path,
@@ -580,7 +584,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv414LaunchReplayUI8uint32_tPKc">RenderDoc</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv414LaunchReplayUI8uint32_tPKc">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * <p>This function will determine the closest matching replay UI executable for the current RenderDoc module and launch it.</p>
@@ -595,7 +599,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv411RemoveHooksv">RenderDoc</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv411RemoveHooksv">Official RenderDoc Documentation</a>:
      * <blockquote>
      * This function will attempt to remove RenderDoc and its hooks from the target process. It must be called as early as possible in the process, and will have undefined results if any graphics API functions have been called.
      *
@@ -627,7 +631,7 @@ public final class RenderDocAPI {
     /**
      * <b><i>Warning: This is an optional operation. If you do not know what you are doing, you most likely do not need to use it.</i></b>
      *
-     * <p>Copied from <a href="">RenderDoc</a>:
+     * <p>From the <a href="">Official RenderDoc Documentation</a>:
      * <blockquote>
      *     This function will immediately begin a capture for the specified device/window combination.
      * </blockquote>
@@ -660,13 +664,15 @@ public final class RenderDocAPI {
     /**
      * <b><i>Warning: This is an optional operation. If you do not know what you are doing, you most likely do not need to use it.</i></b>
      *
-     * <p>Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv415SetActiveWindow23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">RenderDoc</a>:
+     * <p>From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv415SetActiveWindow23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * This function will explicitly set which window is considered active. The active window is the one that will be captured when the keybind to trigger a capture is pressed.
      * </blockquote>
      * @param devicePointer is a handle to the API ‘device’ object that will be set active. Must be valid.
      * @param windowHandle  is a handle to the platform window handle that will be set active. Must be valid.
+     *
+     * @see "The RenderDocAPI Javadoc section, <i>'Obtaining Window Handles and Device Pointers'</i> for more information..."
      */
     //TEST: PASSING
     public void setActiveWindow(long devicePointer, long windowHandle) {
@@ -678,12 +684,13 @@ public final class RenderDocAPI {
     /**
      * <b><i>Warning: This is an optional operation. If you do not know what you are doing, you most likely do not need to use it.</i></b>
      *
-     *
-     *
-     * @param devicePointer
-     * @param windowHandle
+     * @param devicePointer is a handle to the API ‘device’ object that will be set active. Must be valid.
+     * @param windowHandle  is a handle to the platform window handle that will be set active. Must be valid.
      *
      * @see RenderDocAPI#supplyAPIDevicePointer(long)
+     * @see RenderDocAPI#supplyWindowHandle(long)
+     *
+     * @see "The RenderDocAPI Javadoc section, <i>'Obtaining Window Handles and Device Pointers'</i> for more information..."
      */
     //TEST: PASSING
     public void supplyPointers(long devicePointer, long windowHandle) {
@@ -692,7 +699,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      * <blockquote>
      *     This function returns a value to indicate whether the current frame is capturing.
      * </blockquote>
@@ -707,7 +714,7 @@ public final class RenderDocAPI {
     /**
      * <b><i>Warning: This is an optional operation. If you do not know what you are doing, you most likely do not need to use it.</i></b>
      *
-     * <p>Copied from <a href="">RenderDoc</a>:
+     * <p>From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      *     This function will immediately end an active capture for the specified device/window combination.
@@ -732,7 +739,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="">RenderDoc</a>:
+     * From the <a href="">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * <p>This function will trigger multiple sequential frame captures as if the user had pressed one of the capture hotkeys before each frame. The captures will be taken from the next frames presented to whichever window is considered current.
@@ -753,7 +760,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv422SetCaptureFileCommentsPKcPKc">RenderDoc</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv422SetCaptureFileCommentsPKcPKc">Official RenderDoc Documentation</a>:
      * <blockquote>
      * This function adds an arbitrary comments field to an existing capture on disk, which will then be displayed in the UI to anyone opening the capture.
      * </blockquote>
@@ -768,7 +775,7 @@ public final class RenderDocAPI {
     /**
      * <b><i>Warning: This is an optional operation. If you do not know what you are doing, you most likely do not need to use it.</i></b>
      *
-     * <p>Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv419DiscardFrameCapture23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">RenderDoc</a>:
+     * <p>From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv419DiscardFrameCapture23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * This function is similar to {@link #endFrameCapture(long, long)} but the capture contents will be discarded immediately, and not processed and written to disk.
@@ -790,7 +797,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv412ShowReplayUIv">RenderDoc</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv412ShowReplayUIv">Official RenderDoc Documentation</a>:
      *
      * <blockquote>
      * <p>This function requests that the currently connected replay UI raise its window to the top. This is only possible if an instance of the replay UI is currently connected, otherwise this function does nothing.
@@ -806,7 +813,7 @@ public final class RenderDocAPI {
     }
 
     /**
-     * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv415SetCaptureTitlePKc">RenderDoc</a>:
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv415SetCaptureTitlePKc">Official RenderDoc Documentation</a>:
      * <blockquote>
      * This function sets a given title for the currently in-progress capture, which will be displayed in the UI.
      * This can be used either with a user-defined capture using a manual start and end, or an automatic capture triggered by TriggerCapture() or a keypress.

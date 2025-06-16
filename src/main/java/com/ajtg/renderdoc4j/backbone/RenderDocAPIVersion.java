@@ -68,6 +68,7 @@ public enum RenderDocAPIVersion implements NativeMapped {
 
     private final int fullVersion;
 
+    @SuppressWarnings("SameParameterValue")
     RenderDocAPIVersion(int major, int minor, int patch) {
         this.major = major;
         this.minor = minor;

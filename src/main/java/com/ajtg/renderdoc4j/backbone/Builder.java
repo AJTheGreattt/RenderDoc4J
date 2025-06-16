@@ -3,7 +3,6 @@ package com.ajtg.renderdoc4j.backbone;
 import com.ajtg.renderdoc4j.options.overlay.RenderDocOverlayBit;
 import com.ajtg.renderdoc4j.util.CaptureListener;
 import com.sun.jna.Native;
-import com.sun.source.tree.Scope;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URISyntaxException;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**

@@ -5,7 +5,7 @@ import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
 public enum RenderDocOverlayBit implements EnumIntNativeMapped {
 
         /**
-         * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits26eRENDERDOC_Overlay_EnabledE">RenderDoc</a>:
+         * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits26eRENDERDOC_Overlay_EnabledE">Official RenderDoc Documentation</a>:
          *
          * <blockquote>
          *     ...is an overall enable/disable bit. If this is disabled, no overlay renders.
@@ -14,7 +14,7 @@ public enum RenderDocOverlayBit implements EnumIntNativeMapped {
         ENABLED(0b1),
 
         /**
-         * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits28eRENDERDOC_Overlay_FrameRateE">RenderDoc</a>:
+         * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits28eRENDERDOC_Overlay_FrameRateE">Official RenderDoc Documentation</a>:
          *
          * <blockquote>
          *     ...shows the average, min and max frame time in milliseconds, and the average framerate.
@@ -23,7 +23,7 @@ public enum RenderDocOverlayBit implements EnumIntNativeMapped {
         FRAME_RATE(0b10),
 
         /**
-         * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits30eRENDERDOC_Overlay_FrameNumberE">RenderDoc</a>:
+         * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits30eRENDERDOC_Overlay_FrameNumberE">Official RenderDoc Documentation</a>:
          *
          * <blockquote>
          *     ...shows the current frame number, as counted by the number of presents.
@@ -32,7 +32,7 @@ public enum RenderDocOverlayBit implements EnumIntNativeMapped {
         FRAME_NUMBER(0b100),
 
         /**
-         * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits30eRENDERDOC_Overlay_CaptureListE">RenderDoc</a>:
+         * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits30eRENDERDOC_Overlay_CaptureListE">Official RenderDoc Documentation</a>:
          *
          * <blockquote>
          *     ...shows how many total captures have been made, and a list of captured frames in the last few seconds.
@@ -41,7 +41,7 @@ public enum RenderDocOverlayBit implements EnumIntNativeMapped {
         CAPTURE_LIST(0b1000),
 
         /**
-         * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits26eRENDERDOC_Overlay_DefaultE">RenderDoc</a>:
+         * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits26eRENDERDOC_Overlay_DefaultE">Official RenderDoc Documentation</a>:
          *
          * <blockquote>
          *     ...is the default set of bits, which is the value of the mask at startup.
@@ -50,7 +50,7 @@ public enum RenderDocOverlayBit implements EnumIntNativeMapped {
         DEFAULT(ENABLED.bit | FRAME_RATE.bit | FRAME_NUMBER.bit | CAPTURE_LIST.bit),
 
         /**
-         * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits22eRENDERDOC_Overlay_AllE">RenderDoc</a>:
+         * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits22eRENDERDOC_Overlay_AllE">Official RenderDoc Documentation</a>:
          *
          * <blockquote>
          *     ...is equal to ~0U so all bits are enabled.
@@ -61,7 +61,7 @@ public enum RenderDocOverlayBit implements EnumIntNativeMapped {
         ALL(0b1111),
 
         /**
-         * Copied from <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits23eRENDERDOC_Overlay_NoneE">RenderDoc</a>:
+         * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv4N21RENDERDOC_OverlayBits23eRENDERDOC_Overlay_NoneE">Official RenderDoc Documentation</a>:
          *
          * <blockquote>
          *     ...is equal to 0 so all bits are disabled.
