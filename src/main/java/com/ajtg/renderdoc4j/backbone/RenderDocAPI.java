@@ -74,7 +74,7 @@ import java.util.function.Supplier;
  *     Make sure to use a matching API header for your build - if you use a newer header, the API version may not be available. All RenderDoc builds supporting this API ship the header in their root directory.
  * </blockquote>
  *
- * <p>As long as RenderDoc licensing allows, this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true:
+ * <p>As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true:
  *  <ul>
  *      <li>RenderDoc can run on your platform</li>
  *      <li>You can provide the absolute path of the RenderDoc shared-library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>

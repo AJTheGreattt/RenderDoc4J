@@ -44,7 +44,7 @@ Specifying a `RenderDocAPIVersion` and/or shared-library file for RenderDoc is n
  >
  > All RenderDoc builds supporting this API ship the header in their root directory.
 
- As long as RenderDoc licensing allows, this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true\:
+ As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true\:
   
    * RenderDoc can run on your platform
    * You can provide the absolute path of the RenderDoc shared-library file to [JNA](https://github.com/java-native-access/jna)
