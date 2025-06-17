@@ -34,9 +34,9 @@ There are multiple ways to create and obtain the `Instance`\:
 
 ## API Versioning
 
-**Warning\:** The `RenderDocAPIVersion` you request may not be available depending on the version of the RenderDoc shared-library file (you may specify).
+**Warning\:** The `RenderDocAPIVersion` you request may not be available depending on the version of the RenderDoc shared library file (you may specify).
 
-Specifying a `RenderDocAPIVersion` and/or shared-library file for RenderDoc is not a requirement to use this library.
+Specifying a `RenderDocAPIVersion` and/or shared library file for RenderDoc is not a requirement to use this library.
 
  From the [Official RenderDoc Documentation](https://renderdoc.org/docs/in_application_api.html)\:
 
@@ -47,10 +47,10 @@ Specifying a `RenderDocAPIVersion` and/or shared-library file for RenderDoc is n
  As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true\:
   
    * RenderDoc can run on your platform
-   * You can provide the absolute path of the RenderDoc shared-library file to [JNA](https://github.com/java-native-access/jna)
-   * [JNA](https://github.com/java-native-access/jna) can load the shared-library file for RenderDoc on your platform
+   * You can provide the absolute path of the RenderDoc shared library file to [JNA](https://github.com/java-native-access/jna)
+   * [JNA](https://github.com/java-native-access/jna) can load the shared library file for RenderDoc on your platform
 
-_See also `Builder#withAbsoluteSharedLibraryPath(Path)` and `Builder#withSharedLibraryResource(String)` for information on how to provide your own shared-library file..._
+_See also `Builder#withAbsoluteSharedLibraryPath(Path)` and `Builder#withSharedLibraryResource(String)` for information on how to provide your own shared library file..._
 
 ## Unassociated with RenderDoc
 

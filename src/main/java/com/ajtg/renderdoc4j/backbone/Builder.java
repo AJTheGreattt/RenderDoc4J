@@ -69,9 +69,9 @@ public class Builder {
     }
 
     /**
-     * Specifies an absolute path to your RenderDoc shared-library file using Java's {@link Path} interface. This is useful for making sure that the API Version you request is available, since the .DLL that comes with this library will always be the latest version of RenderDoc.
+     * Specifies an absolute path to your RenderDoc shared library file using Java's {@link Path} interface. This is useful for making sure that the API Version you request is available, since the .DLL that comes with this library will always be the latest version of RenderDoc.
      *
-     * @param absolutePath The absolute path to the shared-library as specified by the JNA {@link com.sun.jna.NativeLibrary NativeLibrary} and determined by {@link Path#isAbsolute()}
+     * @param absolutePath The absolute path to the shared library as specified by the JNA {@link com.sun.jna.NativeLibrary NativeLibrary} and determined by {@link Path#isAbsolute()}
      * @return this {@link Builder Builder}
      */
     //TODO: Test & Adjust
@@ -98,7 +98,7 @@ public class Builder {
     }
 
     /**
-     * Specifies the name and (optionally) the directory to where your RenderDoc shared-library file is stored in your programs {@code resources} file. The {@link ClassLoader#getSystemClassLoader() System Class Loader} is used to search for this resource file.
+     * Specifies the name and (optionally) the directory to where your RenderDoc shared library file is stored in your programs {@code resources} file. The {@link ClassLoader#getSystemClassLoader() System Class Loader} is used to search for this resource file.
      *
      * @param resourceFileName The file name of the resource in this program's resources folder, including its file extension that needs to be loaded. The rules of the JNA {@link com.sun.jna.NativeLibrary NativeLibrary} must be followed.
      * @return this {@link Builder Builder}
@@ -107,7 +107,7 @@ public class Builder {
      */
     public Builder withSharedLibraryResource(String resourceFileName) {
         final URL resource = Objects.requireNonNull(ClassLoader.getSystemClassLoader()
-                .getResource(resourceFileName), () -> ("Could not find the shared-library [%s] for RenderDoc. " +
+                .getResource(resourceFileName), () -> ("Could not find the shared library [%s] for RenderDoc. " +
                 "Please be advised that the resource name must include the extension of the file, *if* the file has an extension").formatted(resourceFileName));
 
         try {
@@ -126,22 +126,34 @@ public class Builder {
      * <p>Here is an excerpt from the <a href="https://java-native-access.github.io/jna/5.17.0/javadoc/#loading">JNA</a> documentation:</p>
      *
      * <blockquote>
+     *
+     * <p>The {@code String} passed to the {@code Native.load(String,Class)} (or {@code NativeLibrary.getInstance(String)}) method is the undecorated name of the shared library file.
+     *
+     * <p>Here are some examples of library name mappings.
+     *
      * <table>
-     *  <tr><th><b>OS</b></th><th><b>Library Name</b></th><th><b>String</b></th></tr>
+     *
+     *  <tr><th><b>OS</b></th><th><b>Library Name</b></th><th><b>{@code String}</b></th></tr>
+     *
      * <p>
-     *  <tr><td>Windows</td><td>user32.dll</td><td>user32</td></tr>
+     *  <tr><td>Windows</td><td>user32.dll</td><td>{@code user32}</td></tr>
+     *
      * <p>
-     *  <tr><td>Linux</td><td>libX11.so</td><td>X11</td></tr>
+     *  <tr><td>Linux</td><td>libX11.so</td><td>{@code X11}</td></tr>
+     *
      * <p>
-     *  <tr><td>Mac OS X</td><td>libm.dylib</td><td>m</td></tr>
+     *  <tr><td>Mac OS X</td><td>libm.dylib</td><td>{@code m}</td></tr>
+     *
      * <p>
-     *  <tr><td>Mac OS X Framework</td><td>/System/Library/Frameworks/Carbon.framework/Carbon</td><td>Carbon</td></tr>
+     *  <tr><td>Mac OS X Framework</td><td>/System/Library/Frameworks/Carbon.framework/Carbon</td><td>{@code Carbon}</td></tr>
+     *
      * <p>
-     *  <tr><td>Any Platform</td><td>&lt;current process&gt;</td><td><code>null</code></td></tr>
+     *  <tr><td>Any Platform</td><td>&lt;current process&gt;</td><td>{@code null}</td></tr>
+     *
      * </table>
      * </blockquote>
      *
-     * @param sharedLibraryName The undecorated name of the shared-library
+     * @param sharedLibraryName The undecorated name of the shared library
      *
      * @return this {@link Builder Builder}
      */
@@ -203,7 +215,7 @@ public class Builder {
      *
      * <p>By default, this is {@code 1024}.</p>
      *
-     * @param maxFilePathLength The max length in characters (bytes) that you would like to allocate for the file path.
+     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path.
      * @return this {@link Builder Builder}
      */
     public Builder maxFilePathLength(int maxFilePathLength) {

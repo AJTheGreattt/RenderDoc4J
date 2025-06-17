@@ -64,9 +64,9 @@ import java.util.function.Supplier;
  *
  * <h2>API Versioning</h2>
  *
- * <p><b>Warning:</b> The {@link RenderDocAPIVersion} you request may not be available depending on the version of the RenderDoc shared-library file (you may specify).</p>
+ * <p><b>Warning:</b> The {@link RenderDocAPIVersion} you request may not be available depending on the version of the RenderDoc shared library file (you may specify).</p>
  *
- * <p>Specifying a {@link RenderDocAPIVersion} and/or shared-library file for RenderDoc is not a requirement to use this library.</p>
+ * <p>Specifying a {@link RenderDocAPIVersion} and/or shared library file for RenderDoc is not a requirement to use this library.</p>
  *
  * <p>From the <a href="https://renderdoc.org/docs/in_application_api.html">Official RenderDoc Documentation</a>:</p>
  *
@@ -77,11 +77,11 @@ import java.util.function.Supplier;
  * <p>As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true:
  *  <ul>
  *      <li>RenderDoc can run on your platform</li>
- *      <li>You can provide the absolute path of the RenderDoc shared-library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>
- *      <li><a href="https://github.com/java-native-access/jna">JNA</a> can load the shared-library file for RenderDoc on your platform</li>
+ *      <li>You can provide the absolute path of the RenderDoc shared library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>
+ *      <li><a href="https://github.com/java-native-access/jna">JNA</a> can load the shared library file for RenderDoc on your platform</li>
  *  </ul>
  *
- * <p><i>See also {@link Builder#withAbsoluteSharedLibraryPath(Path)} and {@link Builder#withSharedLibraryResource(String)} for information on how to provide your own shared-library file...</i></p>
+ * <p><i>See also {@link Builder#withAbsoluteSharedLibraryPath(Path)} and {@link Builder#withSharedLibraryResource(String)} for information on how to provide your own shared library file...</i></p>
  *
  * <h2>Window Handles and Device Pointers</h2>
  *
@@ -238,16 +238,16 @@ public final class RenderDocAPI {
     /**
      * This is a builder-instantiation method for creating the {@link RenderDocAPI RenderDocAPI} instance.
      *
-     * <p><b>Warning: </b>The {@link RenderDocAPIVersion API Version} you request may NOT be available dependent upon the version of the RenderDoc shared-library file you specify.</p>
+     * <p><b>Warning: </b>The {@link RenderDocAPIVersion API Version} you request may NOT be available dependent upon the version of the RenderDoc shared library file you specify.</p>
      *
-     * <p>This library comes packaged with the latest RenderDoc Windows shared-library Files (.DLL) by default. If you are on another platform, you can still use this API as long as the following is true:
+     * <p>This library comes packaged with the latest RenderDoc Windows shared library Files (.DLL) by default. If you are on another platform, you can still use this API as long as the following is true:
      * <ul>
      *     <li>RenderDoc can run on your platform</li>
-     *     <li>You can provide the absolute path of the shared-library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>
-     *     <li><a href="https://github.com/java-native-access/jna">JNA</a> can load the shared-library file for RenderDoc on your platform</li>
+     *     <li>You can provide the absolute path of the shared library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>
+     *     <li><a href="https://github.com/java-native-access/jna">JNA</a> can load the shared library file for RenderDoc on your platform</li>
      * </ul>
      *
-     * <p><i>See also {@link Builder#withAbsoluteSharedLibraryPath(Path)} and {@link Builder#withSharedLibraryResource(String)} for information on how to provide your own shared-library file...</i></p>
+     * <p><i>See also {@link Builder#withAbsoluteSharedLibraryPath(Path)} and {@link Builder#withSharedLibraryResource(String)} for information on how to provide your own shared library file...</i></p>
      *
      * @param version The version of the API that you may or may not be able to retrieve access to
      * @return A builder that when built, will be the only usable instance of the RenderDocAPI. You can but are not required to save a reference to the built {@link RenderDocAPI}, as it can be obtained with the other get singleton methods.
