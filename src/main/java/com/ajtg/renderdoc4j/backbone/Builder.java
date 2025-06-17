@@ -132,7 +132,6 @@ public class Builder {
      * <p>Here are some examples of library name mappings.
      *
      * <table>
-     *
      *  <tr><th><b>OS</b></th><th><b>Library Name</b></th><th><b>{@code String}</b></th></tr>
      *
      * <p>
@@ -149,7 +148,6 @@ public class Builder {
      *
      * <p>
      *  <tr><td>Any Platform</td><td>&lt;current process&gt;</td><td>{@code null}</td></tr>
-     *
      * </table>
      * </blockquote>
      *
