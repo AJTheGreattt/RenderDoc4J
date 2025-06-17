@@ -126,10 +126,6 @@ import java.util.function.Supplier;
  *
  *
  */
-
-
-//TODO: Documentation
-//TODO: Remove unnecessary final/this keywords
 public final class RenderDocAPI {
 
     static final Supplier<IllegalStateException> INSTANCE_BUILT_ALREADY = () -> new IllegalStateException("The Instance for the RenderDocAPI has already been built");
