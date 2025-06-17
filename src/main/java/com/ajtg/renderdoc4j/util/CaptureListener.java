@@ -23,9 +23,12 @@ public interface CaptureListener {
      *
      * @param captureCount The current capture count
      *
-     * @apiNote Just because a {@link FrameCapture} failed to process does not mean that the <i>capture</i> failed to process. The underlying RenderDoc API does not specify if the capture is made successfully.
+     * @apiNote Just because a {@link FrameCapture} failed to process does not mean that the <i>capture</i> failed to process.
+     * The underlying RenderDoc API only specifies if the capture was successful via {@link RenderDocAPI#endFrameCapture()}, which must be used in conjunction with {@link RenderDocAPI#startFrameCapture()} and (the optional) {@link RenderDocAPI#discardFrameCapture()}.
      *
      * @see RenderDocAPI#getNumCaptures()
+     * @see RenderDocAPI#endFrameCapture()
+     * @see RenderDocAPI#startFrameCapture()
      */
     default void ifFailed(int captureCount) {}
 }
