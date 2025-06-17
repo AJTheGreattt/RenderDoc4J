@@ -16,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Optional;
@@ -151,6 +150,11 @@ public final class RenderDocAPI {
 
     private int maxFileNameLength;
 
+    /**
+     * This field is not exposed externally, and is only used to keep track of when a new capture is made.
+     *
+     * @see RenderDocAPI#updateCaptureListeners()
+     */
     private int captureCount = 0;
 
     RenderDocAPI(@NotNull Builder builder) {
@@ -401,10 +405,17 @@ public final class RenderDocAPI {
         if (captureCount != this.captureCount) {
             this.captureCount = captureCount;
 
-            this.captureListeners.forEach(listener -> {
-                this.getCapture(this.captureCount - 1).ifPresentOrElse(listener::process, () -> listener.ifFailed(this.captureCount));
-            });
+            this.captureListeners.forEach(listener ->
+                    this.getCapture(this.captureCount - 1).ifPresentOrElse(listener::process, () -> listener.ifFailed(this.captureCount)));
         }
+    }
+
+    /**
+     * @return {@link RenderDocAPI#getNumCaptures()}, just with a more concise name.
+     * @see RenderDocAPI#getNumCaptures()
+     */
+    public int getCaptureCount() {
+        return getNumCaptures();
     }
 
     /**
