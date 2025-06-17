@@ -149,8 +149,6 @@ public final class RenderDocAPI {
 
     private final ArrayList<CaptureListener> captureListeners;
 
-    private final ArrayDeque<Runnable> frameQueue = new ArrayDeque<>();
-
     private int maxFileNameLength;
 
     private int captureCount = 0;
@@ -402,9 +400,10 @@ public final class RenderDocAPI {
 
         if (captureCount != this.captureCount) {
             this.captureCount = captureCount;
-            while (!this.frameQueue.isEmpty()) {
-                this.frameQueue.pop().run();
-            }
+
+            this.captureListeners.forEach(listener -> {
+                this.getCapture(this.captureCount - 1).ifPresentOrElse(listener::process, () -> listener.ifFailed(this.captureCount));
+            });
         }
     }
 
