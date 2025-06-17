@@ -414,6 +414,7 @@ public final class RenderDocAPI {
      * @return {@link RenderDocAPI#getNumCaptures()}, just with a more concise name.
      * @see RenderDocAPI#getNumCaptures()
      */
+    //TEST: PASSING
     public int getCaptureCount() {
         return getNumCaptures();
     }
@@ -658,7 +659,7 @@ public final class RenderDocAPI {
      * @see RenderDocAPI#updateCaptureListeners()
      * @apiNote At this point, there is no way to remove a {@link CaptureListener}. This will be implemented in the future.
      */
-    //TODO: TEST
+    //TEST: PASSING
     public void addCaptureListener(CaptureListener listener) {
         this.captureListeners.add(listener);
     }
@@ -693,6 +694,7 @@ public final class RenderDocAPI {
      *
      * @see RenderDocAPI#startFrameCapture(long, long)
      */
+    //TEST: PASSING
     public void startFrameCapture() {
         in().StartFrameCapture.invoke(this.devicePointer.get(), this.windowHandle.get());
     }
@@ -779,6 +781,7 @@ public final class RenderDocAPI {
      *
      * @see RenderDocAPI#endFrameCapture(long, long)
      */
+    //TEST: PASSING
     public boolean endFrameCapture() {
         return in().EndFrameCapture.invoke(this.devicePointer.get(), this.windowHandle.get()) == 1;
     }
@@ -812,7 +815,7 @@ public final class RenderDocAPI {
      * @param filePath The file path to the capture file you would like to adjust the comments for, or {@code null} if you would like to apply the comments to the most recent capture
      * @param comments The comments you would like to write to the capture file
      */
-    //TODO: TEST
+    //TEST: PASSING
     public void setCaptureFileComments(@Nullable String filePath, String comments) {
         in().SetCaptureFileComments.invoke(filePath, comments);
     }
@@ -847,6 +850,7 @@ public final class RenderDocAPI {
      *
      * @see RenderDocAPI#discardFrameCapture(long, long)
      */
+    //TEST: PASSING
     public boolean discardFrameCapture() {
         return in().DiscardFrameCapture.invoke(this.devicePointer.get(), this.windowHandle.get()) == 1;
     }

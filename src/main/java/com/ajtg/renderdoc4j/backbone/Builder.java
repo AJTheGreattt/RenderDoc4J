@@ -56,7 +56,6 @@ public class Builder {
      * @see EnumSet#of(Enum e...)
      * @see EnumSet#range(Enum, Enum)
      */
-
     public Builder withOverlayBits(@NotNull EnumSet<RenderDocOverlayBit> bits) {
 
         Objects.requireNonNull(bits);
@@ -74,7 +73,6 @@ public class Builder {
      * @param absolutePath The absolute path to the shared library as specified by the JNA {@link com.sun.jna.NativeLibrary NativeLibrary} and determined by {@link Path#isAbsolute()}
      * @return This {@link Builder Builder}
      */
-    //TODO: Test & Adjust
     public Builder withAbsoluteSharedLibraryPath(@NotNull Path absolutePath) {
         Objects.requireNonNull(absolutePath);
 
