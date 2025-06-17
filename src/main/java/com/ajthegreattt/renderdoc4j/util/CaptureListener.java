@@ -1,7 +1,7 @@
-package com.ajtg.renderdoc4j.util;
+package com.ajthegreattt.renderdoc4j.util;
 
-import com.ajtg.renderdoc4j.backbone.FrameCapture;
-import com.ajtg.renderdoc4j.backbone.RenderDocAPI;
+import com.ajthegreattt.renderdoc4j.backbone.FrameCapture;
+import com.ajthegreattt.renderdoc4j.backbone.RenderDocAPI;
 
 /**
  * A functional interface for listening to when frames are captured.

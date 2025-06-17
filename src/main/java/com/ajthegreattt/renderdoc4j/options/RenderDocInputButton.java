@@ -1,7 +1,7 @@
-package com.ajtg.renderdoc4j.options;
+package com.ajthegreattt.renderdoc4j.options;
 
-import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
-import com.ajtg.renderdoc4j.backbone.RenderDocAPI;
+import com.ajthegreattt.renderdoc4j.util.EnumIntNativeMapped;
+import com.ajthegreattt.renderdoc4j.backbone.RenderDocAPI;
 
 /**
  * An enum for all allocated and accepted InputButtons for RenderDoc.

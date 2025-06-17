@@ -1,4 +1,4 @@
-package com.ajtg.renderdoc4j.backbone;
+package com.ajthegreattt.renderdoc4j.backbone;
 
 import com.sun.jna.FromNativeContext;
 import com.sun.jna.NativeMapped;

@@ -1,4 +1,4 @@
-package com.ajtg.renderdoc4j.util;
+package com.ajthegreattt.renderdoc4j.util;
 
 import com.sun.jna.FromNativeContext;
 import com.sun.jna.NativeMapped;

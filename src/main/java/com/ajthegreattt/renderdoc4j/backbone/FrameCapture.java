@@ -1,4 +1,4 @@
-package com.ajtg.renderdoc4j.backbone;
+package com.ajthegreattt.renderdoc4j.backbone;
 
 /**
  * A record that stores all the information for a capture.

@@ -1,7 +1,7 @@
-package com.ajtg.renderdoc4j.options.overlay;
+package com.ajthegreattt.renderdoc4j.options.overlay;
 
-import com.ajtg.renderdoc4j.backbone.RenderDocAPI;
-import com.ajtg.renderdoc4j.backbone.RenderDocAPIInternal;
+import com.ajthegreattt.renderdoc4j.backbone.RenderDocAPI;
+import com.ajthegreattt.renderdoc4j.backbone.RenderDocAPIInternal;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.EnumSet;

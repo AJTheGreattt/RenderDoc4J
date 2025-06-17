@@ -4,7 +4,7 @@ plugins {
     id 'checkstyle'
 }
 
-group = 'com.ajtg'
+group = 'com.ajthegreattt'
 version = '1.0-SNAPSHOT'
 
 repositories {

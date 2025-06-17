@@ -1,6 +1,6 @@
-package com.ajtg.renderdoc4j.options.overlay;
+package com.ajthegreattt.renderdoc4j.options.overlay;
 
-import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
+import com.ajthegreattt.renderdoc4j.util.EnumIntNativeMapped;
 
 public enum RenderDocOverlayBit implements EnumIntNativeMapped {
 

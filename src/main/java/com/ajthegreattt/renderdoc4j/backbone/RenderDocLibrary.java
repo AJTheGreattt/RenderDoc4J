@@ -1,6 +1,6 @@
-package com.ajtg.renderdoc4j.backbone;
+package com.ajthegreattt.renderdoc4j.backbone;
 
-import com.ajtg.renderdoc4j.options.RenderDocInputButton;
+import com.ajthegreattt.renderdoc4j.options.RenderDocInputButton;
 import com.sun.jna.Callback;
 import com.sun.jna.Library;
 import com.sun.jna.Pointer;
@@ -8,8 +8,8 @@ import com.sun.jna.Union;
 import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.LongByReference;
 import com.sun.jna.ptr.PointerByReference;
-import com.ajtg.renderdoc4j.options.capture.BooleanCaptureOption;
-import com.ajtg.renderdoc4j.options.capture.FloatingPointCaptureOption;
+import com.ajthegreattt.renderdoc4j.options.capture.BooleanCaptureOption;
+import com.ajthegreattt.renderdoc4j.options.capture.FloatingPointCaptureOption;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

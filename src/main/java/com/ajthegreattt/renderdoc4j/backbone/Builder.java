@@ -1,7 +1,7 @@
-package com.ajtg.renderdoc4j.backbone;
+package com.ajthegreattt.renderdoc4j.backbone;
 
-import com.ajtg.renderdoc4j.options.overlay.RenderDocOverlayBit;
-import com.ajtg.renderdoc4j.util.CaptureListener;
+import com.ajthegreattt.renderdoc4j.options.overlay.RenderDocOverlayBit;
+import com.ajthegreattt.renderdoc4j.util.CaptureListener;
 import com.sun.jna.Native;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,6 +1,6 @@
-package com.ajtg.renderdoc4j.options.capture;
+package com.ajthegreattt.renderdoc4j.options.capture;
 
-import com.ajtg.renderdoc4j.util.EnumIntNativeMapped;
+import com.ajthegreattt.renderdoc4j.util.EnumIntNativeMapped;
 
 /**
  * The different "floating-point" options that RenderDoc supports.
