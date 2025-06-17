@@ -26,7 +26,7 @@ Initializing the `Instance` after Graphics API calls have already been made has 
 There are multiple ways to create and obtain the `Instance`\:
 
 * `RenderDocAPI.getInstance()`
-  * Calling this method will check if the `Instance` is null, and if it is, will create a new default-setting `Instance`.
+  * Calling this method will check if the `Instance` is `null`, and if it is, will create a new default-setting `Instance`.
 * `RenderDocAPI.builder()`
   * This method will return a `Builder` instance which you can customize as you see fit. Consult the Javadocs for the `Builder` class for more information...
 * `RenderDocAPI.builder(version)` and `RenderDocAPI.getOrBuildDefaultInstance(version)`
