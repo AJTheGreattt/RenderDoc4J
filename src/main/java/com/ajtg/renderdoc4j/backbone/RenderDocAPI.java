@@ -294,7 +294,9 @@ public final class RenderDocAPI {
      * <p>Supplies a platform-specific <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv415SetActiveWindow23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">Window Handle</a> to the underlying RenderDocAPI.
      *
      * @param windowHandle the platform-specific window handle
-     * @return this instance of the {@link RenderDocAPI}
+     * @return This instance of the {@link RenderDocAPI}
+     *
+     * @see "The RenderDocAPI Javadoc section, <i>'Obtaining Window Handles and Device Pointers'</i> for more information..."
      */
     //TEST: PASSING
     public RenderDocAPI supplyWindowHandle(long windowHandle) {
@@ -308,7 +310,8 @@ public final class RenderDocAPI {
      * <p>Supplies a Graphics API-specific <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv415SetActiveWindow23RENDERDOC_DevicePointer22RENDERDOC_WindowHandle">API Device Pointer</a> to the underlying RenderDocAPI.
      *
      * @param apiDevicePointer The Graphics API-specific device pointer
-     * @return this instance of the {@link RenderDocAPI}
+     * @return This instance of the {@link RenderDocAPI}
+     * @see "The RenderDocAPI Javadoc section, <i>'Obtaining Window Handles and Device Pointers'</i> for more information..."
      */
     //TEST: PASSING
     public RenderDocAPI supplyAPIDevicePointer(long apiDevicePointer) {
@@ -321,7 +324,7 @@ public final class RenderDocAPI {
      *
      * @param value         The new value you would like to set for the  {@link BooleanCaptureOption}
      * @param captureOption The option you would like to attempt to change
-     * @return true if and only if the option is valid and was set successfully
+     * @return {@code true} if and only if the option is valid and was set successfully
      */
     //TEST: PASSING
     public boolean setBooleanCaptureOption(boolean value, BooleanCaptureOption captureOption) {
@@ -333,7 +336,7 @@ public final class RenderDocAPI {
      *
      * @param value         The new value you would like to set for the {@link FloatingPointCaptureOption}
      * @param captureOption The option you would like to attempt to change
-     * @return true if and only if the option is valid and was set successfully
+     * @return {@code true} if and only if the option is valid and was set successfully
      */
     //TEST: PASSING
     public boolean setFloatCaptureOption(float value, FloatingPointCaptureOption captureOption) {
@@ -345,7 +348,7 @@ public final class RenderDocAPI {
      *
      * @param value The new value you would like to set for all the {@link BooleanCaptureOption}
      * @param array The array of options you would like to attempt to change
-     * @return true if and only if <b>all</b> options are valid and set successfully
+     * @return {@code true} if and only if <b>all</b> options are valid and set successfully
      */
     //TEST: PASSING
     public boolean setBooleanCaptureOptions(boolean value, BooleanCaptureOption... array) {
@@ -663,6 +666,7 @@ public final class RenderDocAPI {
      * @param windowHandle is a handle to the platform window handle that will be set active. May be {@code null} to wildcard match.
      *
      * @see RenderDocAPI#startFrameCapture()
+     * @see "The RenderDocAPI Javadoc section, <i>'Obtaining Window Handles and Device Pointers'</i> for more information..."
      */
     //TEST: PASSING
     public void startFrameCapture(long devicePointer, long windowHandle) {
@@ -675,7 +679,7 @@ public final class RenderDocAPI {
      *
      * <p>If you have not set them, then the underlying API will wildcard match as specified by {@link RenderDocAPI#startFrameCapture(long, long)}.</p>
      *
-     * <p>You are not required to set the pointers for this method to operate correctly. The underlying RenderDoc API works just fine without them.</p>
+     * <p><i>You are not required to set the pointers for this method to operate correctly. The underlying RenderDoc API works just fine without them.</i></p>
      *
      * @see RenderDocAPI#startFrameCapture(long, long)
      */
@@ -756,6 +760,15 @@ public final class RenderDocAPI {
         return endFrameCapture();
     }
 
+    /**
+     * Invokes {@link RenderDocAPI#endFrameCapture(long, long)} on the current set {@link RenderDocAPI#supplyAPIDevicePointer(long)  devicePointer} and {@link RenderDocAPI#supplyWindowHandle(long) windowHandle}.
+     *
+     * <p>If you have not set them, then the underlying API will wildcard match as specified by {@link RenderDocAPI#endFrameCapture(long, long)}.</p>
+     *
+     * <p><i>You are not required to set the pointers for this method to operate correctly. The underlying RenderDoc API works just fine without them.</i></p>
+     *
+     * @see RenderDocAPI#endFrameCapture(long, long)
+     */
     public boolean endFrameCapture() {
         return in().EndFrameCapture.invoke(this.devicePointer.get(), this.windowHandle.get()) == 1;
     }
@@ -807,6 +820,7 @@ public final class RenderDocAPI {
      * @param windowHandle  is a handle to the platform window handle that will be set active. May be {@code null} to wildcard match.
      * @return {@code true} if the capture was discarded, and {@code false} if there was an error or no capture was in progress.
      * @see "The RenderDocAPI Javadoc section, <i>'Obtaining Window Handles and Device Pointers'</i> for more information..."
+     * @see RenderDocAPI#discardFrameCapture()
      */
     //TEST: PASSING
     public boolean discardFrameCapture(long devicePointer, long windowHandle) {
@@ -814,6 +828,15 @@ public final class RenderDocAPI {
         return discardFrameCapture();
     }
 
+    /**
+     * Invokes {@link RenderDocAPI#discardFrameCapture(long, long)} on the current set {@link RenderDocAPI#supplyAPIDevicePointer(long)  devicePointer} and {@link RenderDocAPI#supplyWindowHandle(long) windowHandle}.
+     *
+     * <p>If you have not set them, then the underlying API will wildcard match as specified by {@link RenderDocAPI#discardFrameCapture(long, long)}.</p>
+     *
+     * <p><i>You are not required to set the pointers for this method to operate correctly. The underlying RenderDoc API works just fine without them.</i></p>
+     *
+     * @see RenderDocAPI#discardFrameCapture(long, long)
+     */
     public boolean discardFrameCapture() {
         return in().DiscardFrameCapture.invoke(this.devicePointer.get(), this.windowHandle.get()) == 1;
     }
@@ -848,6 +871,8 @@ public final class RenderDocAPI {
      * </blockquote>
      *
      * @param title The title you would like to set
+     * @see RenderDocAPI#startFrameCapture()
+     * @see RenderDocAPI#triggerCapture()
      */
     //TEST: PASSING
     public void setCaptureTitle(String title) {
