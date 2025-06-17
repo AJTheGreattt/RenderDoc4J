@@ -164,7 +164,7 @@ public enum RenderDocAPIVersion implements NativeMapped {
     }
 
     /**
-     * @return the version formatted as described by {@link RenderDocAPIVersion#fromInt(int)}
+     * @return The version formatted as described by {@link RenderDocAPIVersion#fromInt(int)}
      */
     public int getStrippedVersion() {
         return this.strippedVersion;

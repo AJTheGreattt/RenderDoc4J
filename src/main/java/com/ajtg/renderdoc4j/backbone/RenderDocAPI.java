@@ -426,7 +426,7 @@ public final class RenderDocAPI {
      * Returns the value of the given {@link BooleanCaptureOption}.
      *
      * @param captureOption The {@link BooleanCaptureOption} you would like to know the value of
-     * @return the currently set value of the {@link BooleanCaptureOption}
+     * @return The currently set value of the {@link BooleanCaptureOption}
      */
     //TEST: PASSING
     public boolean getBooleanCaptureOption(BooleanCaptureOption captureOption) {
@@ -437,7 +437,7 @@ public final class RenderDocAPI {
      * Returns the value of the given {@link FloatingPointCaptureOption}.
      *
      * @param captureOption The {@link FloatingPointCaptureOption} you would like to know the value of
-     * @return the currently set value of the {@link FloatingPointCaptureOption}
+     * @return The currently set value of the {@link FloatingPointCaptureOption}
      */
     //TEST: PASSING
     public float getFloatCaptureOption(FloatingPointCaptureOption captureOption) {
