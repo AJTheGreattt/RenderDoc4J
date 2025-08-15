@@ -4,6 +4,8 @@ This library wraps the API of the renown [RenderDoc](https://renderdoc.org)
 software and creates high-level abstracted bindings that allow
 for users to utilize it in Java.
 
+Requires JDK 16 at the minimum.
+
 ## Getting Started
 
 If you wanna' just get right to it, call `RenderDocAPI.getInstance()` before any Graphics API calls, and (as long as your program's window is up...) you will see that RenderDoc is injected into your program.
