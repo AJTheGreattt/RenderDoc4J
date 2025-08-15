@@ -4,7 +4,7 @@ plugins {
     id 'checkstyle'
 }
 
-group = 'com.ajthegreattt.rdoc4j'
+group = 'com.ajthegreattt'
 version = '1.0.0'
 
 repositories {
@@ -53,7 +53,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/AJTheGreattt/RDOC4J")
+            url = uri("https://maven.pkg.github.com/AJTheGreattt/RenderDoc4J")
             credentials {
                 username = "AJTheGreattt"
                 password = System.getenv("GITHUB_TOKEN")
@@ -61,10 +61,8 @@ publishing {
         }
     }
     publications {
-        gpr(MavenPublication) {
-            groupId = 'com.ajthegreattt.rdoc4j'
-            artifactId = 'RenderDoc4J'
-            version = '1.0.0'
+        mavenJava(MavenPublication) {
+            artifactId = 'renderdoc4j'
             from components.java
         }
     }
@@ -77,7 +75,7 @@ dependencies {
 }
 
 jar {
-    archiveFileName = 'rdoc4j-' + project.version + '.jar'
+//    archiveFileName = 'rdoc4j-' + project.version + '.jar'
 
     exclude '**/exclude/'
 
