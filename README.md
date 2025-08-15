@@ -60,7 +60,7 @@ RenderDoc4J is unassociated with RenderDoc whatsoever.
 Do not report bugs for RenderDoc4J to RenderDoc, and do not report bugs for RenderDoc to RenderDoc4J.
 
 If you are unsure if the bug is from this library, JNA, or RenderDoc, you may post the issue on
-the [RenderDoc4J GitHub](https://github.com), and we will do our best to guide you.
+the [RenderDoc4J GitHub](https://github.com/AJTheGreattt/RenderDoc4J), and we will do our best to guide you.
 
 ## Dependencies and Licensing
 
