@@ -1,6 +1,6 @@
 # RenderDoc4J (RDOC4J)
 
-This library wraps the API of the renown [RenderDoc](https://renderdoc.org)
+This library wraps the API of the renowned [RenderDoc](https://renderdoc.org)
 software and creates high-level abstracted bindings that allow
 for users to utilize it in Java.
 
@@ -15,7 +15,7 @@ If you wanna' just get right to it, call `RenderDocAPI.getInstance()` before any
 This library uses a lazy initialization approach
 to allow for direct control of when the RenderDocAPI will be injected into the application.
 
-As soon as the `Instance` of the library is built—whether it indirectly from `RenderDocAPI.getInstance()`, or from a
+As soon as the `Instance` of the library is built—whether it is indirectly from `RenderDocAPI.getInstance()`, or from a
 `Builder` instance's `build()` call—it will be injected into your program.
 
 It is important that you initialize the `Instance` **before** any Graphics API calls, just as it is somewhat required for
@@ -66,7 +66,7 @@ the [RenderDoc4J GitHub](https://github.com/AJTheGreattt/RenderDoc4J), and we wi
 
 ## Dependencies and Licensing
 
-**Warning**\: While RenderDoc's Licensing allows, this library will bundle the [RenderDoc](https://renderdoc.org) .DLL (for Windows), which is also
+**Warning**\: While RenderDoc's Licensing allows, this library will bundle the latest [RenderDoc](https://renderdoc.org) .DLL (for Windows), which is also
 licensed under the MIT License.
 
 A copy of RenderDoc's License and Copyright Notices can be found in the [
