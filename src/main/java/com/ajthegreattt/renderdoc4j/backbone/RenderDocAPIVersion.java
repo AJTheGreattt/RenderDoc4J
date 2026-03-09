@@ -66,13 +66,20 @@ public enum RenderDocAPIVersion implements NativeMapped {
     Version_1_5_0(1, 5, 0),
 
     /**
+     * RenderDocAPI V1.6.0.
+     */
+    Version_1_6_0(1, 6, 0),
+
+    /**
      * The default version of the {@link RenderDocAPI} that will be used if no {@link RenderDocAPIVersion Version} is specified.
      *
      * <p>This is the latest version of the API.</p>
      *
-     * <p>RenderDocAPI V1.6.0.</p>
+     * <p>RenderDocAPI V1.7.0.</p>
+     *
+     * @since 2.0.0
      */
-    Version_1_6_0(1, 6, 0);
+    Version_1_7_0(1, 7, 0);
 
     private final int major;
     private final int minor;
@@ -102,80 +109,51 @@ public enum RenderDocAPIVersion implements NativeMapped {
      * @throws IllegalArgumentException If the {@code version} passed in is invalid
      */
     public static RenderDocAPIVersion fromInt(int version) {
-        return (switch (version) {
-            case 100 -> Version_1_0_0;
-            case 101 -> Version_1_0_1;
-            case 102 -> Version_1_0_2;
-            case 110 -> Version_1_1_0;
-            case 111 -> Version_1_1_1;
-            case 112 -> Version_1_1_2;
-            case 120 -> Version_1_2_0;
-            case 130 -> Version_1_3_0;
-            case 140 -> Version_1_4_0;
-            case 141 -> Version_1_4_1;
-            case 142 -> Version_1_4_2;
-            case 150 -> Version_1_5_0;
-            case 160 -> Version_1_6_0;
-            default -> throw new IllegalArgumentException("There is no RenderDocAPI Version listed for " + version);
-        });
-        RenderDocAPIVersion out;
         switch (version) {
             case 100: {
-                out = Version_1_0_0;
-                break;
+                return Version_1_0_0;
             }
             case 101: {
-                out = Version_1_0_1;
-                break;
+                return Version_1_0_1;
             }
             case 102: {
-                out = Version_1_0_2;
-                break;
+                return Version_1_0_2;
             }
             case 110: {
-                out = Version_1_1_0;
-                break;
+                return Version_1_1_0;
             }
             case 111: {
-                out = Version_1_1_1;
-                break;
+                return Version_1_1_1;
             }
             case 112: {
-                out = Version_1_1_2;
-                break;
+                return Version_1_1_2;
             }
             case 120: {
-                out = Version_1_2_0;
-                break;
+                return Version_1_2_0;
             }
             case 130: {
-                out = Version_1_3_0;
-                break;
+                return Version_1_3_0;
             }
             case 140: {
-                out = Version_1_4_0;
-                break;
+                return Version_1_4_0;
             }
             case 141: {
-                out = Version_1_4_1;
-                break;
+                return Version_1_4_1;
             }
             case 142: {
-                out = Version_1_4_2;
-                break;
+                return Version_1_4_2;
             }
             case 150: {
-                out = Version_1_5_0;
-                break;
+                return Version_1_5_0;
             }
             case 160: {
-                out = Version_1_6_0;
-                break;
+                return Version_1_6_0;
+            }
+            case 170: {
+                return Version_1_7_0;
             }
             default: throw new IllegalArgumentException("There is no RenderDocAPI Version listed for " + version);
         }
-
-        return out;
     }
 
     @Override

@@ -17,7 +17,7 @@ public final class FrameCapture {
     /**
      * @param index     The index of this capture, which is dependent upon the number of captures in the current session
      * @param fileName  The name and path to the capture file. This path may not be absolute depending upon the {@link RenderDocAPI#setCaptureFilePath}.
-     * @param timestamp The timestamp of when the capture was taken.
+     * @param timestamp The timestamp of when the capture was taken
      *
      */
     public FrameCapture(int index, String fileName, long timestamp) {

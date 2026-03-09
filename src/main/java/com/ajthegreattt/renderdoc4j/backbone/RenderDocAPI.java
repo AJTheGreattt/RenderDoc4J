@@ -1,15 +1,20 @@
 package com.ajthegreattt.renderdoc4j.backbone;
 
-import com.ajthegreattt.renderdoc4j.util.CaptureListener;
-import com.sun.jna.Pointer;
-import com.sun.jna.ptr.IntByReference;
-import com.sun.jna.ptr.LongByReference;
-import com.sun.jna.ptr.PointerByReference;
+import com.ajthegreattt.renderdoc4j.annotations.OpenGLIdentifiers;
+import com.ajthegreattt.renderdoc4j.annotations.RenderDocAnnotationType;
+import com.ajthegreattt.renderdoc4j.annotations.RenderDocAnnotationTypes;
+import com.ajthegreattt.renderdoc4j.annotations.RenderDocAnnotationValue;
+import com.ajthegreattt.renderdoc4j.annotations.ReturnResult;
 import com.ajthegreattt.renderdoc4j.options.RenderDocInputButton;
 import com.ajthegreattt.renderdoc4j.options.capture.BooleanCaptureOption;
 import com.ajthegreattt.renderdoc4j.options.capture.FloatingPointCaptureOption;
 import com.ajthegreattt.renderdoc4j.options.overlay.OverlaySettingBits;
 import com.ajthegreattt.renderdoc4j.options.overlay.RenderDocOverlayBit;
+import com.ajthegreattt.renderdoc4j.util.CaptureListener;
+import com.sun.jna.Pointer;
+import com.sun.jna.ptr.IntByReference;
+import com.sun.jna.ptr.LongByReference;
+import com.sun.jna.ptr.PointerByReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,7 +78,7 @@ import java.util.function.Supplier;
  *     Make sure to use a matching API header for your build - if you use a newer header, the API version may not be available. All RenderDoc builds supporting this API ship the header in their root directory.
  * </blockquote>
  *
- * <p>As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true:
+ * <p>As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc {@code .dll} (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true:
  *  <ul>
  *      <li>RenderDoc can run on your platform</li>
  *      <li>You can provide the absolute path of the RenderDoc shared library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>
@@ -238,7 +243,7 @@ public final class RenderDocAPI {
      *
      * <p><b>Warning: </b>The {@link RenderDocAPIVersion API Version} you request may NOT be available dependent upon the version of the RenderDoc shared library file you specify.</p>
      *
-     * <p>This library comes packaged with the latest RenderDoc Windows shared library Files (.DLL) by default. If you are on another platform, you can still use this API as long as the following is true:
+     * <p>This library comes packaged with the latest RenderDoc Windows shared library Files ({@code .dll}) by default. If you are on another platform, you can still use this API as long as the following is true:
      * <ul>
      *     <li>RenderDoc can run on your platform</li>
      *     <li>You can provide the absolute path of the shared library file to <a href="https://github.com/java-native-access/jna">JNA</a></li>
@@ -283,16 +288,30 @@ public final class RenderDocAPI {
     }
 
     /**
+     * Creates a new {@link RenderDocLibrary.RENDERDOC_GLResourceReference} with the given identifier and object name.
+     * @param identifier The OpenGL identifier for the resource.
+     * @param objectName The name of the OpenGL object.
+     *                  Normally this name is returned via OpenGL generation/creation functions,
+     *                  like {@code glGenBuffers(...)}, {@code glGenTextures(...)}, etc.
+     * @return A pointer to the newly created {@link RenderDocLibrary.RENDERDOC_GLResourceReference}.
+     */
+    public static Pointer newGLReferencePointer(OpenGLIdentifiers identifier, int objectName) {
+        return new RenderDocLibrary.RENDERDOC_GLResourceReference(identifier, objectName).getPointer();
+    }
+
+    /**
      * Specifies the maximum length in characters (bytes) that you would like to allocate for the file name/path. This is necessary due to the functionality of the C language.
+     *
+     * <p>Any negative value will be interpreted as a "don't care" value,
+     *      which means the library will instead allocate only as much memory as necessary for a given file path.</p>
+     *
+     * <p>A {@code 0} will be interpreted as not wanting the file path for a capture at all.</p>
      *
      * <p>By default, this is {@value Builder#DEFAULT_MAX_FILE_PATH_LENGTH}.</p>
      *
-     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path. Must be greater than 0.
+     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path.
      * */
     public void setMaxFilePathLength(int maxFilePathLength) {
-        if (maxFilePathLength < 1) {
-            throw new IllegalArgumentException("maxFilePathLength must be greater than 0. Got " + maxFilePathLength);
-        }
         this.maxFilePathLength = maxFilePathLength;
     }
 
@@ -409,17 +428,21 @@ public final class RenderDocAPI {
         final int captureCount = getNumCaptures();
 
         if (captureCount != this.captureCount) {
-            this.captureCount = captureCount;
+            final int startingCaptureCount = this.captureCount;
 
             this.captureListeners.forEach(listener -> {
-                final Optional<FrameCapture> capture = this.getCapture(this.captureCount - 1);
+                for (int i = startingCaptureCount; i < captureCount; ++i) {
+                    final Optional<FrameCapture> capture = this.getCapture(i);
 
-                if (capture.isPresent()) {
-                    listener.process(capture.get());
-                } else {
-                    listener.ifFailed(this.captureCount);
+                    if (capture.isPresent()) {
+                        listener.process(capture.get());
+                    } else {
+                        listener.ifFailed(i);
+                    }
                 }
             });
+
+            this.captureCount = captureCount;
         }
     }
 
@@ -588,6 +611,26 @@ public final class RenderDocAPI {
         in().TriggerCapture.invoke();
     }
 
+    private ByteBuffer allocateFilePathBuffer(int index, IntByReference intPointer) {
+        if (this.maxFilePathLength == 0) {
+            return null;
+        }
+
+        final int invocationResult = in().GetCapture.invoke(index, null, intPointer, null);
+
+        final int realPathLength = intPointer.getValue();
+
+        if (invocationResult == 0 ||
+                (realPathLength > this.maxFilePathLength &&
+                        this.maxFilePathLength > 0)) {
+            return null;
+        }
+
+        intPointer.setValue(realPathLength);
+
+        return ByteBuffer.allocateDirect(realPathLength);
+    }
+
     /**
      * Attempts to gather the information for a capture at a given index.
      *
@@ -598,23 +641,32 @@ public final class RenderDocAPI {
     //TEST: PASSING
     public Optional<FrameCapture> getCapture(int index) {
 
-        ByteBuffer fileNameBuffer = ByteBuffer.allocate(this.maxFilePathLength);
+        final IntByReference pathLengthByReference = new IntByReference();
 
-        IntByReference pathLength = new IntByReference();
-        LongByReference timeStamp = new LongByReference();
+        final @Nullable ByteBuffer fileNameBuffer = allocateFilePathBuffer(index, pathLengthByReference);
 
-        final int result = in().GetCapture.invoke(index, fileNameBuffer, pathLength, timeStamp);
+        final LongByReference timeStamp = new LongByReference();
+
+        final int result = in().GetCapture.invoke(index, fileNameBuffer, null, timeStamp);
 
         if (result == 0) {
             return Optional.empty();
         } else {
-            final int realPathLength = pathLength.getValue();
+            final String fileName;
 
-            byte[] fileNameArr = new byte[realPathLength];
+            if (fileNameBuffer == null) {
+                fileName = "";
+            } else {
+                final int pathLength = pathLengthByReference.getValue();
 
-            fileNameBuffer.get(fileNameArr);
+                final byte[] fileNameArr = new byte[pathLength - 1];
 
-            return Optional.of(new FrameCapture(index, new String(fileNameArr, StandardCharsets.UTF_8), timeStamp.getValue()));
+                fileNameBuffer.get(fileNameArr, 0, pathLength - 1);
+
+                fileName = new String(fileNameArr, StandardCharsets.UTF_8);
+            }
+
+            return Optional.of(new FrameCapture(index, fileName, timeStamp.getValue()));
         }
     }
 
@@ -906,4 +958,153 @@ public final class RenderDocAPI {
         in().SetCaptureTitle.invoke(title);
     }
 
+    /**
+     * Overload of {@link #setObjectAnnotation(RenderDocLibrary.RENDERDOC_DevicePointer, Pointer, String, RenderDocAnnotationValue)}
+     * that assumes the {@code devicePointer} is already stored within the {@link RenderDocAPI} instance and passes it in place.
+     *
+     * @see #supplyAPIDevicePointer(long)
+     */
+    public ReturnResult setObjectAnnotation(@Nullable Pointer object, @NotNull String key, @Nullable RenderDocAnnotationValue annotationValue) {
+        return setObjectAnnotation(this.devicePointer.get(), object, key, annotationValue);
+    }
+
+    /**
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv419SetObjectAnnotation23RENDERDOC_DevicePointerPvPKc24RENDERDOC_AnnotationType8uint32_tPK25RENDERDOC_AnnotationValue">Official RenderDoc Documentation</a>:
+     * <blockquote>
+     * This function allows associating custom rich annotations with API objects.
+     * These annotations can be examined in the <a href="https://renderdoc.org/docs/window/resource_inspector.html">Resource Inspector</a>.
+     *
+     * <p>See the <a href="https://renderdoc.org/docs/window/annotation_viewer.html">Annotation Viewer</a>
+     * documentation for more detailed information on the annotation system.</p>
+     * </blockquote>
+     *
+     * <strong>NOTE: If you are using OpenGL,
+     * it is HIGHLY recommended that you read up on the requirements for OpenGL compatibility with this Annotation system,
+     * which can be found <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv419SetObjectAnnotation23RENDERDOC_DevicePointerPvPKc24RENDERDOC_AnnotationType8uint32_tPK25RENDERDOC_AnnotationValue">here.</a>
+     *
+     * <p>You should also see {@link RenderDocLibrary.RENDERDOC_GLResourceReference} and {@link #newGLReferencePointer(OpenGLIdentifiers, int)}.</p>
+     *
+     * <p>To convert a {@link RenderDocLibrary.RENDERDOC_GLResourceReference} to a {@link Pointer}, use {@link RenderDocLibrary.RENDERDOC_GLResourceReference#getPointer()}.</p>
+     * </strong>
+     *
+     * @param devicePointer is a handle to the API ‘device’ object that will be set active. May be {@code null} to wildcard match.
+     *
+     * @param object is a handle to the API object that will be annotated. Must not be {@code null}.
+     *
+     * @param key is a dot separated path for the annotation to update. Must not be {@code null} or empty.
+     *
+     * @param annotationValue An {@link RenderDocAnnotationValue} retrieved via {@code RenderDocAnnotationType#value()} or {@code RenderDocAnnotationTypevectorValue()}.
+     *
+     * @return {@link ReturnResult#SUCCESS} if the annotation was successfully set.
+     *
+     * <p>{@link ReturnResult#DEVICE_UNKNOWN_OR_INVALID} if the device is unknown or invalid.</p>
+     *
+     * <p>{@link ReturnResult#ANNOTATION_NOT_RECOGNIZED} if the device is valid but the annotation is not recognised or not supported for API-specific reasons, such as an unrecognised or invalid object or queue/commandbuffer.</p>
+     *
+     * <p>{@link ReturnResult#INVALID_CALL} if the call is ill-formed or invalid e.g. empty is specified with a value pointer, or non-empty is specified with a {@code null} value pointer.</p>
+     *
+     * @see #setObjectAnnotation(Pointer, String, RenderDocAnnotationValue)
+     * @see RenderDocLibrary.RENDERDOC_GLResourceReference
+     * @see #newGLReferencePointer(OpenGLIdentifiers, int)
+     * @see RenderDocAnnotationValue
+     * @see RenderDocAnnotationType
+     * @see RenderDocAnnotationTypes
+     * */
+    //TEST: PASSING
+    public ReturnResult setObjectAnnotation(@Nullable RenderDocLibrary.RENDERDOC_DevicePointer devicePointer, @Nullable Pointer object, @NotNull String key, @Nullable RenderDocAnnotationValue annotationValue) {
+        //avoid triple ternary to help the JIT
+        if (annotationValue != null) {
+            return ReturnResult.map(in().SetObjectAnnotation.invoke(devicePointer,
+                object,
+                key,
+                annotationValue.annotationType.value,
+                annotationValue.vectorLength,
+                    annotationValue.toUnion()));
+        } else {
+            return ReturnResult.map(in().SetObjectAnnotation.invoke(devicePointer,
+                    object,
+                    key,
+                    RenderDocAnnotationTypes.EMPTY.value,
+                    0,
+                    null));
+        }
+    }
+
+    /**
+     * Overload of {@link #setCommandAnnotation(RenderDocLibrary.RENDERDOC_DevicePointer, Pointer, String, RenderDocAnnotationValue)}
+     * that assumes the {@code devicePointer} is already stored within the {@link RenderDocAPI} instance and passes it in place.
+     *
+     * @see #supplyAPIDevicePointer(long)
+     */
+    public ReturnResult setCommandAnnotation(@Nullable Pointer queueOrCommandBuffer, @NotNull String key, @Nullable RenderDocAnnotationValue annotationValue) {
+        return setCommandAnnotation(this.devicePointer.get(), queueOrCommandBuffer, key, annotationValue);
+    }
+
+    /**
+     * From the <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv420SetCommandAnnotation23RENDERDOC_DevicePointerPvPKc24RENDERDOC_AnnotationType8uint32_tPK25RENDERDOC_AnnotationValue">Official RenderDoc Documentation</a>:
+     * <blockquote>
+     * This function allows adding custom rich annotations to command streams.
+     * These annotations can be examined in the <a href="https://renderdoc.org/docs/window/annotation_viewer.html">Annotation Viewer</a> which has more information on the annotation system.
+     *
+     * <p>For more information see the page on the <a href="https://renderdoc.org/docs/window/annotation_viewer.html">Annotation Viewer</a>.</p>
+     *
+     * ...The {@code queueOrCommandBuffer} parameter refers to a different object depending on the API:
+     *
+     * <p>On Vulkan, it can either be a {@code VkCommandBuffer} in the recording state, or a {@code VkQueue}.</p>
+     *
+     * <p>On OpenGL, it must be {@code null}.</p>
+     *
+     * <p>On D3D11 it must either be {@code null} or the immediate context {@code ID3D11DeviceContext*}.</p>
+     *
+     * <p>On D3D12 it must either be an {@code ID3D12GraphicsCommandList*} or a {@code ID3D12CommandQueue*}.</p>
+     * </blockquote>
+     *
+     * <strong>NOTE: If you are using OpenGL,
+     * it is HIGHLY recommended that you read up on the requirements for OpenGL compatibility with this Annotation system,
+     * which can be found <a href="https://renderdoc.org/docs/in_application_api.html#_CPPv420SetCommandAnnotation23RENDERDOC_DevicePointerPvPKc24RENDERDOC_AnnotationType8uint32_tPK25RENDERDOC_AnnotationValue">here.</a>
+     *
+     * <p>You should also see {@link RenderDocLibrary.RENDERDOC_GLResourceReference} and {@link #newGLReferencePointer(OpenGLIdentifiers, int)}.</p>
+     *
+     * <p>To convert a {@link RenderDocLibrary.RENDERDOC_GLResourceReference} to a {@link Pointer}, use {@link RenderDocLibrary.RENDERDOC_GLResourceReference#getPointer()}.</p>
+     * </strong>
+     *
+     * @param devicePointer a handle to the API ‘device’ object that will be set active. May be {@code null} to wildcard match.
+     *
+     * @param queueOrCommandBuffer a dot separated path for the annotation to update. Must not be {@code null} (unless one of the above rules applies) or empty.
+     *
+     * @param key a dot separated path for the annotation to update. Must not be {@code null} or empty.
+     *
+     * @param annotationValue An {@link RenderDocAnnotationValue} retrieved via {@code RenderDocAnnotationType#value()} or {@code RenderDocAnnotationTypevectorValue()}.
+     *
+     * @return {@link ReturnResult#SUCCESS} if the annotation was successfully set.
+     *
+     * <p>{@link ReturnResult#DEVICE_UNKNOWN_OR_INVALID} if the device is unknown or invalid.</p>
+     *
+     * <p>{@link ReturnResult#ANNOTATION_NOT_RECOGNIZED} if the device is valid but the annotation is not recognised or not supported for API-specific reasons, such as an unrecognised or invalid object or queue/commandbuffer.</p>
+     *
+     * <p>{@link ReturnResult#INVALID_CALL} if the call is ill-formed or invalid e.g. empty is specified with a value pointer, or non-empty is specified with a {@code null} value pointer.</p>
+     *
+     *
+     * @see #setCommandAnnotation(Pointer, String, RenderDocAnnotationValue)
+     * @see RenderDocLibrary.RENDERDOC_GLResourceReference
+     * @see #newGLReferencePointer(OpenGLIdentifiers, int)
+     * */
+    public ReturnResult setCommandAnnotation(@Nullable RenderDocLibrary.RENDERDOC_DevicePointer devicePointer, @Nullable Pointer queueOrCommandBuffer, @NotNull String key, RenderDocAnnotationValue annotationValue) {
+        //avoid triple ternary to help the JIT
+        if (annotationValue != null) {
+            return ReturnResult.map(in().SetCommandAnnotation.invoke(devicePointer,
+                    queueOrCommandBuffer,
+                    key,
+                    annotationValue.annotationType.value,
+                    annotationValue.vectorLength,
+                    annotationValue.toUnion()));
+        } else {
+            return ReturnResult.map(in().SetCommandAnnotation.invoke(devicePointer,
+                    queueOrCommandBuffer,
+                    key,
+                    RenderDocAnnotationTypes.EMPTY.value,
+                    0,
+                    null));
+        }
+    }
 }

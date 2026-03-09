@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * The builder for the RenderDocAPI instance. A {@link Builder} can only {@link Builder#build} once per program execution. If a {@link Builder#build} call occurs again, an {@link IllegalStateException} will be thrown.
@@ -23,11 +22,7 @@ import java.util.function.Supplier;
  */
 public class Builder {
 
-    public static final int DEFAULT_MAX_FILE_PATH_LENGTH = 512;
-
-    private static final Supplier<IllegalArgumentException> NO_PATH = () -> new IllegalArgumentException("The Path passed in for the specified RenderDoc .DLL does not exist," +
-            " or cannot be seen by this JVM instance");
-
+    public static final int DEFAULT_MAX_FILE_PATH_LENGTH = -1;
 
     final ArrayList<CaptureListener> captureListeners = new ArrayList<>(3);
 
@@ -71,7 +66,10 @@ public class Builder {
     }
 
     /**
-     * Specifies an absolute path to your RenderDoc shared library file using Java's {@link Path} interface. This is useful for making sure that the API Version you request is available, since the .DLL that comes with this library will always be the latest version of RenderDoc.
+     * Specifies an absolute path to your RenderDoc shared library file using Java's {@link Path} interface.
+     * This is useful for making sure that the API Version you request is available,
+     * since the {@code .dll} that comes with this library will always be the latest
+     * version of RenderDoc (at the time this version of RenderDoc4J was released).
      *
      * @param absolutePath The absolute path to the shared library as specified by the JNA {@link com.sun.jna.NativeLibrary NativeLibrary} and determined by {@link Path#isAbsolute()}
      * @return This {@link Builder Builder}
@@ -80,7 +78,9 @@ public class Builder {
         Objects.requireNonNull(absolutePath);
 
         if (!Files.exists(absolutePath)) {
-            throw NO_PATH.get();
+            throw new IllegalArgumentException(
+                    "The Path passed in for the specified RenderDoc .dll does not exist," +
+                    " or cannot be seen by this JVM instance");
         }
 
         if (!absolutePath.isAbsolute()) {
@@ -88,8 +88,6 @@ public class Builder {
         }
 
         if (absolutePath.toFile().isFile()) {
-            //Just in case, we call absolutePath again
-            //ideally, this should be separated into our own if/else
             final Path parent = absolutePath.getParent();
             absolutePath = (parent == null ? absolutePath : parent).toAbsolutePath();
         }
@@ -100,7 +98,7 @@ public class Builder {
     }
 
     /**
-     * Specifies the name and (optionally) the directory to where your RenderDoc shared library file is stored in your programs {@code resources} file. The {@link ClassLoader#getSystemClassLoader() System Class Loader} is used to search for this resource file.
+     * Specifies the name and (optionally) the directory to where your RenderDoc shared library file is stored in your programs {@code resources} folder. The {@link ClassLoader#getSystemClassLoader() System Class Loader} is used to search for this resource file.
      *
      * @param resourceFileName The file name of the resource in this program's resources folder, including its file extension that needs to be loaded. The rules of the JNA {@link com.sun.jna.NativeLibrary NativeLibrary} must be followed.
      * @return This {@link Builder Builder}
@@ -212,18 +210,21 @@ public class Builder {
     }
 
     /**
-     * Specifies the maximum length in characters (bytes) that you would like to allocate for the file name/path. This is necessary due to the functionality of the C language.
+     * Specifies the maximum length in characters (bytes) that you would like to allocate for the file name/path.
+     * This is necessary due to the functionality of the C language.
+     *
+     * <p>Any negative value will be interpreted as a "don't care" value,
+     * which means the library will instead allocate only as much memory as necessary for a given file path.</p>
+     *
+     * <p>A {@code 0} will be interpreted as not wanting the file path for a capture at all.</p>
      *
      * <p>By default, this is {@value DEFAULT_MAX_FILE_PATH_LENGTH}.</p>
      *
-     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path. Must be greater than 0.
+     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path.
      *
      * @return This {@link Builder Builder}
      */
     public Builder maxFilePathLength(int maxFilePathLength) {
-        if (maxFilePathLength < 1) {
-            throw new IllegalArgumentException("maxFilePathLength must be greater than 0. Got " + maxFilePathLength);
-        }
         this.maxFilePathLength = maxFilePathLength;
         return this;
     }

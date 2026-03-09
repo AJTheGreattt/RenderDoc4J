@@ -21,7 +21,7 @@ public interface CaptureListener {
     /**
      * This is an optional method that you can override if you would like certain functionality to run when a {@link FrameCapture} fails to process after a capture is made.
      *
-     * @param captureCount The current capture count
+     * @param captureIndex The current capture index
      *
      * @apiNote Just because a {@link FrameCapture} failed to process does not mean that the <i>capture</i> failed to process.
      * The underlying RenderDoc API only specifies if the capture was successful via {@link RenderDocAPI#endFrameCapture()}, which must be used in conjunction with {@link RenderDocAPI#startFrameCapture()} and (the optional) {@link RenderDocAPI#discardFrameCapture()}.
@@ -30,5 +30,5 @@ public interface CaptureListener {
      * @see RenderDocAPI#endFrameCapture()
      * @see RenderDocAPI#startFrameCapture()
      */
-    default void ifFailed(int captureCount) {}
+    default void ifFailed(int captureIndex) {}
 }

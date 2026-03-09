@@ -21,7 +21,9 @@ import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_SetCapt
 import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_SetCaptureOptionF32;
 import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_SetCaptureOptionU32;
 import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_SetCaptureTitle;
+import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_SetCommandAnnotation;
 import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_SetFocusToggleKeys;
+import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_SetObjectAnnotation;
 import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_ShowReplayUI;
 import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_StartFrameCapture;
 import com.ajthegreattt.renderdoc4j.backbone.RenderDocLibrary.pRENDERDOC_TriggerCapture;
@@ -37,7 +39,7 @@ import com.sun.jna.Structure;
  *
  * <p>All functions in this class can be reached through the external implementation: {@link RenderDocAPI}.</p>
  * @see RenderDocAPI
- * @see <a href="https://renderdoc.org/docs/in_application_api.html">Official RenderDoc Documenation</a> for more information on these pointers...
+ * @see <a href="https://renderdoc.org/docs/in_application_api.html">Official RenderDoc Documentation</a> for more information on these pointers...
  *
  **/
 @Structure.FieldOrder(value = {"GetAPIVersion",
@@ -66,7 +68,9 @@ import com.sun.jna.Structure;
         "SetCaptureFileComments",
         "DiscardFrameCapture",
         "ShowReplayUI",
-        "SetCaptureTitle"})
+        "SetCaptureTitle",
+        "SetObjectAnnotation",
+        "SetCommandAnnotation"})
 public class RenderDocAPIInternal extends Structure {
 
     public pRENDERDOC_GetAPIVersion GetAPIVersion;
@@ -114,6 +118,9 @@ public class RenderDocAPIInternal extends Structure {
     public pRENDERDOC_ShowReplayUI ShowReplayUI;
 
     public pRENDERDOC_SetCaptureTitle SetCaptureTitle;
+
+    public pRENDERDOC_SetObjectAnnotation SetObjectAnnotation;
+    public pRENDERDOC_SetCommandAnnotation SetCommandAnnotation;
 
     RenderDocAPIInternal(Pointer pointer) {
         super(pointer);
