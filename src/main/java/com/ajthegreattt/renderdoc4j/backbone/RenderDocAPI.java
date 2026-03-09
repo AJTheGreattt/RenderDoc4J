@@ -311,6 +311,7 @@ public final class RenderDocAPI {
      *
      * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path.
      * */
+    //TEST:PASSING
     public void setMaxFilePathLength(int maxFilePathLength) {
         this.maxFilePathLength = maxFilePathLength;
     }
