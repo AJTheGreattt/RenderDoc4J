@@ -6,6 +6,21 @@ for users to use it in Java.
 
 Requires Java 8 at the minimum.
 
+## Maven/Gradle Blocks
+
+```xml
+<!-- Maven -->
+<dependency>
+    <groupId>com.ajthegreattt</groupId>
+    <artifactId>renderdoc4j</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
+```groovy
+// Gradle
+implementation("com.ajthegreattt:renderdoc4j:2.0.0")
+```
+
 ## Getting Started
 
 If you wanna' just get right to it, call `RenderDocAPI.getInstance()` before any Graphics API calls, and (as long as your program's window is up...) you will see that RenderDoc is injected into your program.
