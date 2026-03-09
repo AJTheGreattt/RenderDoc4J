@@ -144,7 +144,7 @@ public final class RenderDocAPI {
 
     private final ArrayList<CaptureListener> captureListeners;
 
-    private int maxFileNameLength;
+    private int maxFilePathLength;
 
     /**
      * This field is not exposed externally, and is only used to keep track of when a new capture is made.
@@ -179,9 +179,9 @@ public final class RenderDocAPI {
 
         this.version = RenderDocAPIVersion.fromInt(Integer.parseInt("" + major.getValue() + minor.getValue() + patch.getValue()));
 
-        this.maxFileNameLength = builder.maxFilePathLength;
+        this.maxFilePathLength = builder.maxFilePathLength;
 
-        var overlayBits = builder.overlayBits;
+        EnumSet<RenderDocOverlayBit>  overlayBits = builder.overlayBits;
 
         this.overlaySettingBits = new OverlaySettingBits(in(), overlayBits.isEmpty() ? EnumSet.of(RenderDocOverlayBit.DEFAULT) : overlayBits);
 
@@ -282,8 +282,18 @@ public final class RenderDocAPI {
         return INSTANCE;
     }
 
-    public void setMaxFileNameLength(int maxFileNameLength) {
-        this.maxFileNameLength = maxFileNameLength;
+    /**
+     * Specifies the maximum length in characters (bytes) that you would like to allocate for the file name/path. This is necessary due to the functionality of the C language.
+     *
+     * <p>By default, this is {@value Builder#DEFAULT_MAX_FILE_PATH_LENGTH}.</p>
+     *
+     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path. Must be greater than 0.
+     * */
+    public void setMaxFilePathLength(int maxFilePathLength) {
+        if (maxFilePathLength < 1) {
+            throw new IllegalArgumentException("maxFilePathLength must be greater than 0. Got " + maxFilePathLength);
+        }
+        this.maxFilePathLength = maxFilePathLength;
     }
 
     /**
@@ -320,24 +330,24 @@ public final class RenderDocAPI {
     /**
      * Sets a new value for the {@link BooleanCaptureOption}. This change is in effect as of the next capture.
      *
-     * @param value         The new value you would like to set for the  {@link BooleanCaptureOption}
      * @param captureOption The option you would like to attempt to change
+     * @param value         The new value you would like to set for the  {@link BooleanCaptureOption}
      * @return {@code true} if and only if the option is valid and was set successfully
      */
     //TEST: PASSING
-    public boolean setBooleanCaptureOption(boolean value, BooleanCaptureOption captureOption) {
+    public boolean setBooleanCaptureOption(BooleanCaptureOption captureOption, boolean value) {
         return in().SetCaptureOptionU32.invoke(captureOption, value ? 1 : 0) == 1;
     }
 
     /**
      * Sets a new value for the {@link FloatingPointCaptureOption}. This change is in effect as of the next capture.
      *
-     * @param value         The new value you would like to set for the {@link FloatingPointCaptureOption}
      * @param captureOption The option you would like to attempt to change
+     * @param value         The new value you would like to set for the {@link FloatingPointCaptureOption}
      * @return {@code true} if and only if the option is valid and was set successfully
      */
     //TEST: PASSING
-    public boolean setFloatCaptureOption(float value, FloatingPointCaptureOption captureOption) {
+    public boolean setFloatCaptureOption(FloatingPointCaptureOption captureOption, float value) {
         return in().SetCaptureOptionF32.invoke(captureOption, value) == 1;
     }
 
@@ -401,8 +411,15 @@ public final class RenderDocAPI {
         if (captureCount != this.captureCount) {
             this.captureCount = captureCount;
 
-            this.captureListeners.forEach(listener ->
-                    this.getCapture(this.captureCount - 1).ifPresentOrElse(listener::process, () -> listener.ifFailed(this.captureCount)));
+            this.captureListeners.forEach(listener -> {
+                final Optional<FrameCapture> capture = this.getCapture(this.captureCount - 1);
+
+                if (capture.isPresent()) {
+                    listener.process(capture.get());
+                } else {
+                    listener.ifFailed(this.captureCount);
+                }
+            });
         }
     }
 
@@ -581,9 +598,9 @@ public final class RenderDocAPI {
     //TEST: PASSING
     public Optional<FrameCapture> getCapture(int index) {
 
-        ByteBuffer fileNameBuffer = ByteBuffer.allocate(this.maxFileNameLength);
+        ByteBuffer fileNameBuffer = ByteBuffer.allocate(this.maxFilePathLength);
 
-        IntByReference pathLength = new IntByReference(this.maxFileNameLength);
+        IntByReference pathLength = new IntByReference();
         LongByReference timeStamp = new LongByReference();
 
         final int result = in().GetCapture.invoke(index, fileNameBuffer, pathLength, timeStamp);
@@ -595,7 +612,7 @@ public final class RenderDocAPI {
 
             byte[] fileNameArr = new byte[realPathLength];
 
-            fileNameBuffer.get(fileNameArr, 0, realPathLength);
+            fileNameBuffer.get(fileNameArr);
 
             return Optional.of(new FrameCapture(index, new String(fileNameArr, StandardCharsets.UTF_8), timeStamp.getValue()));
         }

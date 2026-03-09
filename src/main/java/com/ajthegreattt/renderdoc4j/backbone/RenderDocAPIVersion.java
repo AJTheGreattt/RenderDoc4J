@@ -95,7 +95,7 @@ public enum RenderDocAPIVersion implements NativeMapped {
     /**
      * Attempts to parse an integer that should be in the format of {@code major,minor,patch}.
      *
-     * <p>For example: the latest version would be "160", where the major is 1, the minor is 6, and the patch is 0.</p>
+     * <p>For example, the latest version would be "160", where the major is 1, the minor is 6, and the patch is 0.</p>
      *
      * @param version The version you would like to try and parse
      * @return The parsed {@link RenderDocAPIVersion}
@@ -118,14 +118,72 @@ public enum RenderDocAPIVersion implements NativeMapped {
             case 160 -> Version_1_6_0;
             default -> throw new IllegalArgumentException("There is no RenderDocAPI Version listed for " + version);
         });
+        RenderDocAPIVersion out;
+        switch (version) {
+            case 100: {
+                out = Version_1_0_0;
+                break;
+            }
+            case 101: {
+                out = Version_1_0_1;
+                break;
+            }
+            case 102: {
+                out = Version_1_0_2;
+                break;
+            }
+            case 110: {
+                out = Version_1_1_0;
+                break;
+            }
+            case 111: {
+                out = Version_1_1_1;
+                break;
+            }
+            case 112: {
+                out = Version_1_1_2;
+                break;
+            }
+            case 120: {
+                out = Version_1_2_0;
+                break;
+            }
+            case 130: {
+                out = Version_1_3_0;
+                break;
+            }
+            case 140: {
+                out = Version_1_4_0;
+                break;
+            }
+            case 141: {
+                out = Version_1_4_1;
+                break;
+            }
+            case 142: {
+                out = Version_1_4_2;
+                break;
+            }
+            case 150: {
+                out = Version_1_5_0;
+                break;
+            }
+            case 160: {
+                out = Version_1_6_0;
+                break;
+            }
+            default: throw new IllegalArgumentException("There is no RenderDocAPI Version listed for " + version);
+        }
+
+        return out;
     }
 
     @Override
     public Object fromNative(Object nativeValue, FromNativeContext context) {
         if (context.getTargetType().equals(this.getClass())) {
-            if (nativeValue instanceof Integer intC) {
+            if (nativeValue instanceof Integer) {
                 for (RenderDocAPIVersion value : values()) {
-                    if (value.fullVersion == intC) {
+                    if (value.fullVersion == (Integer) nativeValue) {
                         return value;
                     }
                 }
@@ -173,7 +231,7 @@ public enum RenderDocAPIVersion implements NativeMapped {
     /**
      * Returns an integer that is formatted such that if a version position is less than {@code 10} and is not {@code 0}, a {@code 0} is appended to it regardless.
      *
-     * <p>For example: the latest version would be {@code "10600"}, where the major is {@code 1}, the minor is {@code 6}, and the patch is {@code 0}.
+     * <p>For example, the latest version would be {@code "10600"}, where the major is {@code 1}, the minor is {@code 6}, and the patch is {@code 0}.
      *
      * @return The integer version formatted as described above
      */

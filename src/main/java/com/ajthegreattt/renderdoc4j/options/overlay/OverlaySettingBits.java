@@ -39,7 +39,7 @@ public final class OverlaySettingBits {
 
         final int overlayBits = getOverlayBits();
 
-        var toRet = EnumSet.noneOf(RenderDocOverlayBit.class);
+        EnumSet<RenderDocOverlayBit> toRet = EnumSet.noneOf(RenderDocOverlayBit.class);
 
         for (RenderDocOverlayBit value : RenderDocOverlayBit.values()) {
             if ((overlayBits & value.getBit()) == 0b1) {

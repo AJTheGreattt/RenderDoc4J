@@ -20,9 +20,9 @@ public interface EnumIntNativeMapped extends NativeMapped {
         }
 
         if (context.getTargetType().equals(enumClass)) {
-            if (nativeValue instanceof Integer intC) {
+            if (nativeValue instanceof Integer) {
                 for (EnumIntNativeMapped value : enumClass.getEnumConstants()) {
-                    if (intC.equals(value.toNative())) {
+                    if (nativeValue.equals(value.toNative())) {
                         return Optional.of(value);
                     }
                 }

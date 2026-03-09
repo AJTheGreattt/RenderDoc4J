@@ -17,6 +17,8 @@ import java.nio.ByteBuffer;
 
 public interface RenderDocLibrary extends Library {
 
+    // RDOC - 1.6.0 & RDOC4J - 1.0.0
+
     int RENDERDOC_GetAPI(RenderDocAPIVersion version, PointerByReference outAPIPointers);
 
     interface pRENDERDOC_GetAPIVersion extends Callback {
@@ -102,7 +104,10 @@ public interface RenderDocLibrary extends Library {
     }
 
     interface pRENDERDOC_GetCapture extends Callback {
-        int invoke(int idx, @Nullable ByteBuffer fileName, @Nullable IntByReference pathLength, @Nullable LongByReference timestamp);
+        int invoke(int idx,
+                   @Nullable ByteBuffer fileName,
+                   @Nullable IntByReference pathLength,
+                   @Nullable LongByReference timestamp);
     }
 
     interface pRENDERDOC_TriggerCapture extends Callback {

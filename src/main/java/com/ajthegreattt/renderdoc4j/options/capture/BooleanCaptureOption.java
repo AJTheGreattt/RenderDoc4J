@@ -169,7 +169,7 @@ public enum BooleanCaptureOption implements EnumIntNativeMapped {
      * </blockquote>
      *
      */
-    @Deprecated(forRemoval = true)
+    @Deprecated
     SaveAllInitials(9),
 
     /**

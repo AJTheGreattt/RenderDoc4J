@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Objects;
@@ -21,6 +22,8 @@ import java.util.function.Supplier;
  * @see RenderDocAPI#builder()
  */
 public class Builder {
+
+    public static final int DEFAULT_MAX_FILE_PATH_LENGTH = 512;
 
     private static final Supplier<IllegalArgumentException> NO_PATH = () -> new IllegalArgumentException("The Path passed in for the specified RenderDoc .DLL does not exist," +
             " or cannot be seen by this JVM instance");
@@ -38,7 +41,7 @@ public class Builder {
 
     long apiDeviceHandle;
 
-    int maxFilePathLength = 1024;
+    int maxFilePathLength = DEFAULT_MAX_FILE_PATH_LENGTH;
 
     private String sharedLibraryName = "renderdoc";
 
@@ -87,7 +90,8 @@ public class Builder {
         if (absolutePath.toFile().isFile()) {
             //Just in case, we call absolutePath again
             //ideally, this should be separated into our own if/else
-            absolutePath = Objects.requireNonNullElse(absolutePath.getParent(), absolutePath).toAbsolutePath();
+            final Path parent = absolutePath.getParent();
+            absolutePath = (parent == null ? absolutePath : parent).toAbsolutePath();
         }
 
         this.sharedLibraryName = absolutePath.toString();
@@ -105,11 +109,12 @@ public class Builder {
      */
     public Builder withSharedLibraryResource(String resourceFileName) {
         final URL resource = Objects.requireNonNull(ClassLoader.getSystemClassLoader()
-                .getResource(resourceFileName), () -> ("Could not find the shared library [%s] for RenderDoc. " +
-                "Please be advised that the resource name must include the extension of the file, *if* the file has an extension").formatted(resourceFileName));
+                .getResource(resourceFileName), () -> (
+                "Could not find the shared library [" + resourceFileName + "] for RenderDoc. " +
+                        "Please be advised that the resource name must include the extension of the file, *if* the file has an extension"));
 
         try {
-            this.sharedLibraryName = Path.of(resource.toURI()).toAbsolutePath().toString();
+            this.sharedLibraryName = Paths.get(resource.toURI()).toAbsolutePath().toString();
         } catch (URISyntaxException e) {
             throw new RuntimeException("Could not convert the resource's URL to a URI to provide it to JNA", e);
         }
@@ -209,12 +214,16 @@ public class Builder {
     /**
      * Specifies the maximum length in characters (bytes) that you would like to allocate for the file name/path. This is necessary due to the functionality of the C language.
      *
-     * <p>By default, this is {@code 1024}.</p>
+     * <p>By default, this is {@value DEFAULT_MAX_FILE_PATH_LENGTH}.</p>
      *
-     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path.
+     * @param maxFilePathLength The max length in characters (1 {@code byte} per {@code char} in C) that you would like to allocate for the file path. Must be greater than 0.
+     *
      * @return This {@link Builder Builder}
      */
     public Builder maxFilePathLength(int maxFilePathLength) {
+        if (maxFilePathLength < 1) {
+            throw new IllegalArgumentException("maxFilePathLength must be greater than 0. Got " + maxFilePathLength);
+        }
         this.maxFilePathLength = maxFilePathLength;
         return this;
     }

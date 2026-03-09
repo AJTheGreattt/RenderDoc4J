@@ -2,9 +2,9 @@
 
 This library wraps the API of the renowned [RenderDoc](https://renderdoc.org)
 software and creates high-level abstracted bindings that allow
-for users to utilize it in Java.
+for users to use it in Java.
 
-Requires JDK 16 at the minimum.
+Requires Java 8 at the minimum.
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ If you wanna' just get right to it, call `RenderDocAPI.getInstance()` before any
 This library uses a lazy initialization approach
 to allow for direct control of when the RenderDocAPI will be injected into the application.
 
-As soon as the `Instance` of the library is built—whether it is indirectly from `RenderDocAPI.getInstance()`, or from a
+As soon as the `Instance` of the library is built—whether it indirectly from `RenderDocAPI.getInstance()`, or from a
 `Builder` instance's `build()` call—it will be injected into your program.
 
 It is important that you initialize the `Instance` **before** any Graphics API calls, just as it is somewhat required for
@@ -46,7 +46,7 @@ Specifying a `RenderDocAPIVersion` and/or shared library file for RenderDoc is n
  >
  > All RenderDoc builds supporting this API ship the header in their root directory.
 
- As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc .DLL (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true\:
+ As long as RenderDoc licensing allows: this library will come packaged with the latest RenderDoc `.dll` (for Windows) by default. If you are on another platform, you can still use this API as long as the following is true\:
   
    * RenderDoc can run on your platform
    * You can provide the absolute path of the RenderDoc shared library file to [JNA](https://github.com/java-native-access/jna)
@@ -57,7 +57,7 @@ _See also `Builder#withAbsoluteSharedLibraryPath(Path)` and `Builder#withSharedL
 ## Unassociated with RenderDoc
 
 **Note**\: Although this library would not be possible without the fantastic work of Baldur Karlsson and contributors,
-RenderDoc4J is unassociated with RenderDoc whatsoever.
+RenderDoc4J is completely unassociated with RenderDoc.
 
 Do not report bugs for RenderDoc4J to RenderDoc, and do not report bugs for RenderDoc to RenderDoc4J.
 
@@ -66,8 +66,8 @@ the [RenderDoc4J GitHub](https://github.com/AJTheGreattt/RenderDoc4J), and we wi
 
 ## Dependencies and Licensing
 
-**Warning**\: While RenderDoc's Licensing allows, this library will bundle the latest [RenderDoc](https://renderdoc.org) .DLL (for Windows), which is also
+**Warning**\: While RenderDoc's Licensing allows, this library will bundle the latest (at the time this version of RenderDoc4J was released) [RenderDoc](https://renderdoc.org) `.dll` (for Windows), which is also
 licensed under the MIT License.
 
-A copy of RenderDoc's License and Copyright Notices can be found in the [
+A copy of RenderDoc's License and Copyright Notices can be found in the [RenderDoc Official GitHub](https://github.com/baldurk/renderdoc/blob/v1.x/LICENSE.md), as well as in the [
 `licenses/RenderDoc License.md`](licenses/RenderDoc%20License.md) markdown file within this distribution.
