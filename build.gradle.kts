@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.ajthegreattt"
-version = "2.0.0"
+version = "2.0.1"
 
 repositories {
     mavenCentral()
@@ -77,6 +77,11 @@ publishing {
                     license {
                         name.set("The MIT License")
                         url.set("https://opensource.org/licenses/MIT")
+                    }
+                    license {
+                        name.set("RenderDoc License (MIT)")
+                        url.set("https://github.com/baldurk/renderdoc/blob/v1.x/LICENSE.md")
+                        comments.set("This license applies to the bundled RenderDoc binary (.dll) included in this artifact.")
                     }
                 }
                 developers {

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1
+
+### What has changed?
+
+- Changed the build config DSL to use the Gradle Kotlin DSL rather than Groovy.
+- Added the necessary RenderDoc Licensing ot the POM and the Artifacts META-INF directory.
+- Updated the README to include the latest RenderDoc4J version.
+
 ## 2.0.0
 
 ### What was added?

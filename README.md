@@ -13,12 +13,12 @@ Requires Java 8 at the minimum.
 <dependency>
     <groupId>com.ajthegreattt</groupId>
     <artifactId>renderdoc4j</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
 </dependency>
 ```
 ```groovy
 // Gradle
-implementation("com.ajthegreattt:renderdoc4j:2.0.0")
+implementation("com.ajthegreattt:renderdoc4j:2.0.1")
 ```
 
 ## Getting Started
